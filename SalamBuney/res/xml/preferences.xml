@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <EditTextPreference
+        android:dialogMessage="Enter Message"
+        android:dialogTitle="Message"
+        android:key="message"
+        android:summary="Message in Salam"
+        android:title="Message" />
+    <EditTextPreference
+        android:dialogMessage="Enter mobile number to send sms to"
+        android:dialogTitle="Mobile Number"
+        android:key="mobile"
+        android:summary="Mobile phone to which sms will be sent"
+        android:title="Phone Number " />
+
+</PreferenceScreen>
