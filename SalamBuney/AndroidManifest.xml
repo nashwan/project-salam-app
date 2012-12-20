@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="11"
-        android:targetSdkVersion="16" />
+        android:targetSdkVersion="15" />
 
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.WRITE_SMS" />
@@ -29,8 +29,12 @@
         <activity
             android:name="com.example.salambuney.SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName="com.example.salambuney.MainActivity" >
+          >
         </activity>
+        
+        <provider android:name="com.example.salambuney.SalaamDBProvider" android:authorities="com.example.salambuney" ></provider>
+   
+        
     </application>
 
 </manifest>
