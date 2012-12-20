@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <EditTextPreference
         android:dialogMessage="Enter Message"
@@ -13,5 +13,13 @@
         android:key="mobile"
         android:summary="Mobile phone to which sms will be sent"
         android:title="Phone Number " />
+
+    <com.example.salambuney.TimePreference
+        android:dialogMessage="Gadijehey Time"
+        android:dialogTitle="Gadijehey Time"
+        android:key="reporting_time"
+        android:summary="Gadijehey Time"
+        android:title="Gadijehey Time " >
+    </com.example.salambuney.TimePreference>
 
 </PreferenceScreen>
