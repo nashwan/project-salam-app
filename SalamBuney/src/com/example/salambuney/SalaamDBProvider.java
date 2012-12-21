@@ -20,7 +20,10 @@ public class SalaamDBProvider extends ContentProvider {
 	private static final int TEMPLATES = 1;
 	private static final int  TEMPLATES_ID = 2;
 	public static final String TEMPLATES_TABLE_NAME = "templates";
-	public static final String TEMPLATE_MESSAGE = "message";	
+	public static final String TEMPLATE_MESSAGE = "message";
+	public static final String TEMPLATE_ID = "_id";
+	public static final String[] FROM_TEMPLATE_TABLE = { "_id", "message" };
+	
 	public static final Uri CONTENT_URI = Uri
 			.parse("content://com.example.salambuney/templates"); 
 
@@ -71,7 +74,7 @@ public class SalaamDBProvider extends ContentProvider {
 
 		SQLiteDatabase db = salaamDB.getWritableDatabase();
 
-		if (uriMatcher.match(uri) == TEMPLATES) {
+		if (uriMatcher.match(uri) != TEMPLATES) {
 			throw new IllegalArgumentException("Unknown URI " + uri);
 		}
 

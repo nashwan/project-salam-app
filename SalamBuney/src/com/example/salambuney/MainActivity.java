@@ -2,9 +2,10 @@ package com.example.salambuney;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.app.ActionBar;
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.ContentValues;
@@ -15,30 +16,33 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.telephony.SmsManager;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.LinearLayout;
+import android.view.View.OnLongClickListener;
+import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.TableRow.LayoutParams;
 
-public class MainActivity extends Activity implements OnClickListener {
+public class MainActivity extends Activity implements OnClickListener, OnLongClickListener {
 
-	public static final Uri CONTENT_URI = Uri
-			.parse("content://com.example.salambuney/templates");
-	private static String[] FROM = { "_id", "message" };
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
+		
+		ActionBar bar = getActionBar(); 
+		bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#064682")));
+		
 		SharedPreferences sharedPref = PreferenceManager
 				.getDefaultSharedPreferences(this);
 
@@ -74,6 +78,14 @@ public class MainActivity extends Activity implements OnClickListener {
 
 			Intent intent = new Intent();
 			intent.setClass(this, SettingsActivity.class);
+			startActivity(intent);
+
+		}
+		
+		if (item.getItemId() == R.id.menu_new_template) {
+
+			Intent intent = new Intent();
+			intent.setClass(this, NewSMSTemplate.class);
 			startActivity(intent);
 
 		}
@@ -152,7 +164,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	// }
 
 	public Cursor getData() {
-		return managedQuery(CONTENT_URI, FROM, null, null, null);
+		return managedQuery(SalaamDBProvider.CONTENT_URI, SalaamDBProvider.FROM_TEMPLATE_TABLE, null, null, null);
 	}
 
 	private void showTemplates(Cursor cursor) {
@@ -165,27 +177,34 @@ public class MainActivity extends Activity implements OnClickListener {
 			String message = cursor.getString(1);
 			String message_id = cursor.getString(0);
 
-			// create new row
-			TableRow tr = (TableRow) getLayoutInflater().inflate(
-					R.layout.row_template, null);
+			// create new row 
+			TableRow tr =  new TableRow(this);
 			tr.setTag(message_id);
-			tr.setPadding(0, 2, 0, 2);
+			tr.setPadding(3, 2, 3, 2);
+		
 			tr.setClickable(true);
 			tr.setOnClickListener(this);
-
+			
 			// set message styles
-			TextView messageTV = new TextView(this);
-			messageTV.setLayoutParams(new LayoutParams(
-					LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT, 1));
+			TextView messageTV = (TextView) getLayoutInflater().inflate(
+					R.layout.row_template, null);
+			
 
-			messageTV.setTextSize(16);
+			messageTV.setLayoutParams(new LayoutParams(
+					LayoutParams.FILL_PARENT, 45, 1));
+
+			messageTV.setTextSize(17);
 			messageTV.setTypeface(Typeface.DEFAULT_BOLD);
 			messageTV.setPadding(4, 8, 2, 4);
-			messageTV.setGravity(Gravity.LEFT);
-			messageTV.setBackgroundColor(Color.parseColor("#1774ca"));
-			messageTV.setTextColor(Color.parseColor("#b6dcff"));
+			messageTV.setGravity(Gravity.BOTTOM);
+			//messageTV.setTextColor(Color.parseColor("#05407b"));
 
+			//messageTV.setBackgroundColor(Color.parseColor("#c8e3fe"));
 			messageTV.setText(message); // set message
+			messageTV.setTag(message_id);
+			messageTV.setOnClickListener(this);
+			messageTV.setOnLongClickListener(this);
+		
 			tr.addView(messageTV); // sets message id to the row.
 			templatesTL.addView(tr);
 			count++;
@@ -197,15 +216,21 @@ public class MainActivity extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
-		if (v.getTag() != null) {
-			String id = (String) v.getTag();
-			Cursor cursor = managedQuery(CONTENT_URI, FROM, "_id = " + id, null, null);
+		
+		switch (v.getId()) {
+		
+		default:
+			if (v.getTag() != null) {
+				Toast.makeText(this, "Attempting to send message.", Toast.LENGTH_SHORT).show();
+				String id = (String) v.getTag();
+				Cursor cursor = managedQuery(SalaamDBProvider.CONTENT_URI, SalaamDBProvider.FROM_TEMPLATE_TABLE, "_id = " + id, null, null);
 
-			while (cursor.moveToNext()) {
-				String message = cursor.getString(1);
+				while (cursor.moveToNext()) {
+					String message = cursor.getString(1);
 
-				sentMessage(message);
+					sentMessage(message);
+				}
+
 			}
 
 		}
@@ -218,7 +243,7 @@ public class MainActivity extends Activity implements OnClickListener {
 				.getDefaultSharedPreferences(this);
 
 		String smsNumber = sharedPref.getString("mobile", "not set");
-		String smsText =  message;
+		String smsText = message;
 
 		/*
 		 * Uri uri = Uri.parse("smsto:" + smsNumber); Intent intent = new
@@ -271,14 +296,17 @@ public class MainActivity extends Activity implements OnClickListener {
 			return true;
 		} catch (Exception ex) {
 			System.out.println(ex.toString());
-			Toast.makeText(this, "Please try again. Sending message failed. MESSAGE : "+message,
-					Toast.LENGTH_SHORT).show();
+			Toast.makeText(
+					this,
+					"Please try again. Sending message failed. MESSAGE : "
+							+ message, Toast.LENGTH_SHORT).show();
 			return false;
 		}
 
 	}
 
 	public void StoreSMS() {
+
 		SharedPreferences sharedPref = PreferenceManager
 				.getDefaultSharedPreferences(this);
 
@@ -290,6 +318,23 @@ public class MainActivity extends Activity implements OnClickListener {
 		values.put("address", smsNumber);
 		values.put("body", smsText);
 		getContentResolver().insert(Uri.parse("content://sms/sent"), values);
+	}
+	
+
+	@Override
+	public boolean onLongClick(View v) {
+		
+		if (v.getTag() != null) {
+			
+			String id = (String) v.getTag();
+			//start edit template intent
+			Intent intent = new Intent(this, EditSMSTemplate.class);
+			intent.putExtra("message_id", id);
+			startActivity(intent);
+			return true;
+
+		}
+		return false;
 	}
 
 }
