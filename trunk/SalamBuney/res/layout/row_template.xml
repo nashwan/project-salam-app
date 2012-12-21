@@ -1,10 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
-<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="match_parent" 
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:layout_marginLeft="2dp"
+    android:layout_marginRight="2dp"
+    android:layout_marginTop="10dp" 
+	android:clickable="true"   
+	android:textColor="#d1e8ff"
 	android:background="@drawable/template_row"
-	android:layout_margin="3dp"
-    >
-    
+>
 
-</TableRow>
+</TextView>

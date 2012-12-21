@@ -11,20 +11,40 @@ public final class R {
     public static final class attr {
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
-        public static final int template_row=0x7f020001;
-        public static final int template_row_clicked=0x7f020002;
-        public static final int template_row_selected=0x7f020003;
+        public static final int add_button_image=0x7f020000;
+        public static final int add_new_button=0x7f020001;
+        public static final int add_new_message_default=0x7f020002;
+        public static final int add_new_message_selected=0x7f020003;
+        public static final int ic_launcher=0x7f020004;
+        public static final int icon_plus=0x7f020005;
+        public static final int icon_settings_1=0x7f020006;
+        public static final int template_row=0x7f020007;
+        public static final int template_row_clicked=0x7f020008;
+        public static final int template_row_default=0x7f020009;
+        public static final int template_row_selected=0x7f02000a;
     }
     public static final class id {
-        public static final int listTemplates=0x7f080001;
+        public static final int btnCancelEditSMS=0x7f080006;
+        public static final int btnCancelNewSMS=0x7f08000a;
+        public static final int btnSaveEditSMS=0x7f080005;
+        public static final int btnSaveNewSMS=0x7f080009;
+        public static final int etEditSMSMessageText=0x7f080004;
+        public static final int etNewSMSMessageText=0x7f080008;
+        public static final int frameItem=0x7f080007;
+        public static final int listTemplates=0x7f080002;
         public static final int main_content_container=0x7f080000;
-        public static final int menu_settings=0x7f080002;
+        public static final int menu_new_template=0x7f08000b;
+        public static final int menu_settings=0x7f08000c;
+        public static final int scrollView1=0x7f080001;
+        public static final int tvAddMessageDisplay=0x7f080003;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int activity_settings=0x7f030001;
         public static final int row_template=0x7f030002;
+        public static final int template_edit=0x7f030003;
+        public static final int template_frame_layout=0x7f030004;
+        public static final int template_new=0x7f030005;
     }
     public static final class menu {
         public static final int activity_main=0x7f070000;
