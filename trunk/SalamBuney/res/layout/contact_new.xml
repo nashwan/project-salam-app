@@ -16,23 +16,22 @@
             android:layout_margin="5dp" >
 
             <TextView
-                android:id="@+id/tvAddMessageDisplay"
+                android:id="@+id/textView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Message"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-            
-             <EditText
-                android:id="@+id/etNewSMSMessageText"
+                android:gravity="right"
+                android:text="Name"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <EditText
+                android:id="@+id/etPersonName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textMultiLine" >
+                android:inputType="textPersonName" >
 
                 <requestFocus />
             </EditText>
-
-            <requestFocus />
         </TableRow>
 
         <TableRow
@@ -41,7 +40,20 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp" >
 
-           
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="Phone Number"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <EditText
+                android:id="@+id/etPhoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number" />
         </TableRow>
 
         <TableRow
@@ -51,19 +63,16 @@
             android:layout_margin="10dp" >
 
             <Button
-                android:id="@+id/btnCancelNewSMS"
-                style="?android:attr/buttonStyleSmall"
+                android:id="@+id/btnCancelContact"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="Cancel" />
 
             <Button
-                android:id="@+id/btnSaveNewSMS"
+                android:id="@+id/btnSaveContact"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="Save" />
         </TableRow>
     </TableLayout>

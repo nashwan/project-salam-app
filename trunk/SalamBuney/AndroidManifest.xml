@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="11"
+        android:minSdkVersion="14"
         android:targetSdkVersion="16" />
 
     <uses-permission android:name="android.permission.SEND_SMS" />
@@ -37,11 +37,34 @@
             android:name="com.example.salambuney.EditSMSTemplate"
             android:label="Edit Template" >
         </activity>
+        <activity
+            android:name="com.example.salambuney.Home"
+            android:label="Templates" >
+        </activity>
+        <activity
+            android:name="com.example.salambuney.Numbers"
+            android:label="Templates" >
+        </activity>
+        <activity
+            android:name="com.example.salambuney.History"
+            android:label="History" >
+        </activity>
+        <activity
+            android:name="com.example.salambuney.NewContact"
+            android:label="New Contact" >
+        </activity>
+        <activity
+            android:name="com.example.salambuney.MessageSender"
+            android:label="Send Message" >
+        </activity>
 
         <provider
             android:name="com.example.salambuney.SalaamDBProvider"
-            android:authorities="com.example.salambuney" >
+            android:authorities="com.example.salambuney"
+            android:label="My templates"
+            android:multiprocess="true" >
         </provider>
+    
     </application>
 
 </manifest>

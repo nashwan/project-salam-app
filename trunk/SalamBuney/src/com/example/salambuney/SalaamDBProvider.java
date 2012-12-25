@@ -12,26 +12,70 @@ import android.text.TextUtils;
 
 public class SalaamDBProvider extends ContentProvider {
 
-	public static final int DATABASE_VERSION = 1;
 	public static final String AUTHORITY = "com.example.salambuney";
 	public static final String DATABASE_NAME = "salaam_db";
-	
-	//message template table related 
-	private static final int TEMPLATES = 1;
-	private static final int  TEMPLATES_ID = 2;
-	public static final String TEMPLATES_TABLE_NAME = "templates";
-	public static final String TEMPLATE_MESSAGE = "message";
-	public static final String TEMPLATE_ID = "_id";
-	public static final String[] FROM_TEMPLATE_TABLE = { "_id", "message" };
-	
-	public static final Uri CONTENT_URI = Uri
-			.parse("content://com.example.salambuney/templates"); 
 
-	private static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.salambuney";
-	private static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd.salambuney";
+	private static final int MULTIPLES = 1;
+	private static final int SINGLE = 2;
+
+	// message template table related
+	public static final String[] FROM_TEMPLATE_TABLE = { "_id", "message" };
+	public static final String[] FROM_HISTORY_TABLE = { "_id", "message", "sent_time" };
+	public static final String[] FROM_CONTACT_TABLE = { "_id", "name", "phone" };
+	
+	
+	public static final Uri CONTENT_URI_TEMPLATES = Uri
+			.parse("content://com.example.salambuney/templates");
+	public static final Uri CONTENT_URI_HISTORY = Uri
+			.parse("content://com.example.salambuney/history");
+	public static final Uri CONTENT_URI_CONTACT = Uri
+			.parse("content://com.example.salambuney/contact");
+	
+	
+	private static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.salambuney.database";
+	private static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd.salambuney.database";
 
 	private SalaamDB salaamDB;
 	private UriMatcher uriMatcher;
+
+	@Override
+	public boolean onCreate() {
+
+		uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+		uriMatcher.addURI(AUTHORITY, "templates", MULTIPLES);
+		uriMatcher.addURI(AUTHORITY, "templates/#", SINGLE);
+		uriMatcher.addURI(AUTHORITY, "history", MULTIPLES);
+		uriMatcher.addURI(AUTHORITY, "history/#", SINGLE);
+		uriMatcher.addURI(AUTHORITY, "contact", MULTIPLES);
+		uriMatcher.addURI(AUTHORITY, "contact/#", SINGLE);
+		salaamDB = new SalaamDB(getContext());
+		return true;
+	}
+
+	private String getTableName(Uri contentUri) {
+		if (CONTENT_URI_TEMPLATES == contentUri)
+			return SalaamDB.TEMPLATES_TABLE_NAME;
+		if (CONTENT_URI_HISTORY == contentUri)
+			return SalaamDB.HISTORY_TABLE_NAME;
+		if (CONTENT_URI_CONTACT == contentUri)
+			return SalaamDB.CONTACT_TABLE_NAME;
+		else
+			return "";
+	}
+
+	@Override
+	public String getType(Uri uri) {
+
+		switch (uriMatcher.match(uri)) {
+		case MULTIPLES:
+			return CONTENT_TYPE;
+		case SINGLE:
+			return CONTENT_ITEM_TYPE;
+
+		default:
+			throw new IllegalArgumentException("Unknown URI " + uri);
+		}
+	}
 
 	@Override
 	public int delete(Uri uri, String selection, String[] selectionArgs) {
@@ -39,12 +83,12 @@ public class SalaamDBProvider extends ContentProvider {
 		SQLiteDatabase db = salaamDB.getWritableDatabase();
 		int count;
 		switch (uriMatcher.match(uri)) {
-		case TEMPLATES:
-			count = db.delete(TEMPLATES_TABLE_NAME, selection, selectionArgs);
+		case MULTIPLES:
+			count = db.delete(getTableName(uri), selection, selectionArgs);
 			break;
-		case TEMPLATES_ID:
+		case SINGLE:
 			long id = Long.parseLong(uri.getPathSegments().get(1));
-			count = db.delete(TEMPLATES_TABLE_NAME, appendRowId(selection, id),
+			count = db.delete(getTableName(uri), appendRowId(selection, id),
 					selectionArgs);
 			break;
 		default:
@@ -57,54 +101,32 @@ public class SalaamDBProvider extends ContentProvider {
 	}
 
 	@Override
-	public String getType(Uri uri) {
-
-		switch (uriMatcher.match(uri)) {
-		case TEMPLATES:
-			return CONTENT_TYPE;
-		case TEMPLATES_ID:
-			return CONTENT_ITEM_TYPE;
-		default:
-			throw new IllegalArgumentException("Unknown URI " + uri);
-		}
-	}
-
-	@Override
 	public Uri insert(Uri uri, ContentValues values) {
 
 		SQLiteDatabase db = salaamDB.getWritableDatabase();
 
-		if (uriMatcher.match(uri) != TEMPLATES) {
+		if (uriMatcher.match(uri) != MULTIPLES) {
 			throw new IllegalArgumentException("Unknown URI " + uri);
 		}
 
-		long id = db.insertOrThrow(TEMPLATES_TABLE_NAME, null, values);
-		Uri newUri = ContentUris.withAppendedId(CONTENT_URI, id);
+		long id = db.insertOrThrow(getTableName(uri), null, values);
+		Uri newUri = ContentUris.withAppendedId(uri, id);
 		getContext().getContentResolver().notifyChange(newUri, null);
+		
 		return newUri;
-	}
-
-	@Override
-	public boolean onCreate() {
-
-		uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
-		uriMatcher.addURI(AUTHORITY, "templates", TEMPLATES);
-		uriMatcher.addURI(AUTHORITY, "templates/#", TEMPLATES_ID);
-		salaamDB = new SalaamDB(getContext());
-		return true;
 	}
 
 	@Override
 	public Cursor query(Uri uri, String[] projection, String selection,
 			String[] selectionArgs, String sortOrder) {
 
-		if (uriMatcher.match(uri) == TEMPLATES_ID) {
+		if (uriMatcher.match(uri) == SINGLE) {
 			long id = Long.parseLong(uri.getPathSegments().get(1));
 			selection = appendRowId(selection, id);
 		}
 
 		SQLiteDatabase db = salaamDB.getReadableDatabase();
-		Cursor cursor = db.query(TEMPLATES_TABLE_NAME, projection, selection,
+		Cursor cursor = db.query(getTableName(uri), projection, selection,
 				selectionArgs, null, null, sortOrder);
 
 		return cursor;
@@ -115,15 +137,21 @@ public class SalaamDBProvider extends ContentProvider {
 			String[] selectionArgs) {
 		SQLiteDatabase db = salaamDB.getWritableDatabase();
 		int count;
+
+
 		switch (uriMatcher.match(uri)) {
-		case TEMPLATES:
-			count = db.update(TEMPLATES_TABLE_NAME,values, selection, selectionArgs);
-			break;
-		case TEMPLATES_ID:
-			long id = Long.parseLong(uri.getPathSegments().get(1));
-			count = db.update(TEMPLATES_TABLE_NAME,values, appendRowId(selection, id),
+		case MULTIPLES:
+			count = db.update(getTableName(uri), values, selection,
 					selectionArgs);
 			break;
+
+		case SINGLE:
+			long id = Long.parseLong(uri.getPathSegments().get(1));
+
+			count = db.update(getTableName(uri), values,
+					appendRowId(selection, id), selectionArgs);
+			break;
+
 		default:
 			throw new IllegalArgumentException("Unknown URI " + uri);
 
@@ -132,10 +160,13 @@ public class SalaamDBProvider extends ContentProvider {
 		getContext().getContentResolver().notifyChange(uri, null);
 		return count;
 	}
-	
-	private String appendRowId(String selection, long id)
-	{
-		return _ID + "=" + id + (!TextUtils.isEmpty(selection) ? " AND (" +selection + ')' : "");
+
+	private String appendRowId(String selection, long id) {
+		return _ID
+				+ "="
+				+ id
+				+ (!TextUtils.isEmpty(selection) ? " AND (" + selection + ')'
+						: "");
 	}
 
 }

@@ -1,6 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
-      <item
+    <!--
+    <item
         android:id="@+id/menu_new_template"
         android:layout_width="wrap_content"
         android:icon="@drawable/icon_plus"
@@ -8,13 +9,18 @@
         android:showAsAction="always"
         android:title="New SMS">
     </item>
+    -->
+    <item
+        android:id="@+id/menu_new_template"
+        android:orderInCategory="2"
+        android:showAsAction="never"
+        android:title="New Template"/>
     <item
         android:id="@+id/menu_settings"
         android:icon="@drawable/icon_settings_1"
-        android:orderInCategory="100"
+        android:orderInCategory="1"
         android:showAsAction="ifRoom"
-        android:title="@string/menu_settings">
-    </item>
-  
+        android:title="@string/menu_settings" />
+    
 
 </menu>
