@@ -3,7 +3,7 @@
       <item android:drawable="@drawable/template_row_clicked"
          android:state_pressed="true"
            /> 
-    <item android:drawable="@drawable/template_row_selected"
+    <item android:drawable="@drawable/template_row_default"
         
            />
    

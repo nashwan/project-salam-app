@@ -2,65 +2,55 @@
     android:id="@+id/main_content_container"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#244e76" >
+    android:background="#dbe7f1" >
 
-    <!--
-    <TableLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent" >
-
-        <TableRow
-            android:id="@+id/tableRow1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-            <TextView
-                android:id="@+id/tv_mobile_numer"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" />
-        </TableRow>
-        <TableRow
-            android:id="@+id/tableRow2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-            <TextView
-                android:id="@+id/tv_message"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" />
-        </TableRow>
-        <TableRow
-            android:id="@+id/tableRow2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-            <Button
-                android:id="@+id/btn_send_now"
-                android:text="Send Now"
-                android:onClick="btnSendNowClick">
-                
-            </Button>
-        </TableRow>
-    </TableLayout>-->
-    <ScrollView
-        android:id="@+id/scrollView1"
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent" >
+ 
+    <TabHost
+        android:id="@android:id/tabhost"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1" >
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
 
-            <TableLayout
-                android:id="@+id/listTemplates"
+            <TabWidget
+                android:id="@android:id/tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp" >
+                android:background="#024a91" 
+                
+               >
+            </TabWidget>
 
-               
-            </TableLayout>
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                
+               >
+
+                <LinearLayout
+                    android:id="@+id/tab1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/tab2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/tab3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+                </LinearLayout>
+            </FrameLayout>
         </LinearLayout>
-    </ScrollView>
+    </TabHost>
 
 </LinearLayout>

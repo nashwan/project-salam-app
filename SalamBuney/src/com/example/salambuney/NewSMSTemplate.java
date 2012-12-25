@@ -53,16 +53,16 @@ public class NewSMSTemplate extends  Activity implements OnClickListener{
 		{
 		case R.id.btnSaveNewSMS:
 			
-			Cursor cursor = managedQuery(SalaamDBProvider.CONTENT_URI, SalaamDBProvider.FROM_TEMPLATE_TABLE, null, null, null);
+			Cursor cursor = managedQuery(SalaamDBProvider.CONTENT_URI_TEMPLATES, SalaamDBProvider.FROM_TEMPLATE_TABLE, null, null, null);
 			
 			String message = etMessageText.getText().toString();
 			int id  =  cursor.getCount() +1;
 			
 			ContentValues values = new ContentValues();
 		
-			values.put(SalaamDBProvider.TEMPLATE_ID,id);
-	    	values.put(SalaamDBProvider.TEMPLATE_MESSAGE, message);
-	    	getContentResolver().insert(SalaamDBProvider.CONTENT_URI, values);
+			values.put(SalaamDB.TEMPLATE_ID,id);
+	    	values.put(SalaamDB.TEMPLATE_MESSAGE, message);
+	    	getContentResolver().insert(SalaamDBProvider.CONTENT_URI_TEMPLATES, values);
 	    	Intent intentMain = new Intent(this, MainActivity.class);
 			startActivity(intentMain);
 			finish();
