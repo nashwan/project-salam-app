@@ -83,6 +83,7 @@ public class EditContact extends Activity implements OnClickListener {
 						SalaamDBProvider.CONTENT_URI_CONTACT, values,
 						"_id=" + id, null);
 				Intent intentMain = new Intent(this, MainActivity.class);
+				intentMain.putExtra("tab", 1);
 				startActivity(intentMain);
 
 				Toast.makeText(this, "Contact update successful.",
@@ -94,6 +95,7 @@ public class EditContact extends Activity implements OnClickListener {
 			case R.id.btnCancelContactEdit:
 				Intent intent = new Intent(this, MainActivity.class);
 				startActivity(intent);
+				intent.putExtra("tab", 1);
 				finish();
 				break;
 			}

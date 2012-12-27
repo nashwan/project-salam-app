@@ -53,8 +53,8 @@ public class MessageOptionsDialogue extends DialogFragment implements
 		super.onCreateView(inflater, container, savedInstanceState);
 
 		String message_id = getArguments().getString("message_id");
-
-		String[] cols = new String[] { "Send now", "Schedule", "Edit", "Delete" };
+		String[] cols = new String[] { "Send now", "Edit", "Delete" };
+//		String[] cols = new String[] { "Send now", "Schedule", "Edit", "Delete" };
 
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(
 				this.getActivity(), android.R.layout.simple_list_item_1, cols);
@@ -97,18 +97,18 @@ public class MessageOptionsDialogue extends DialogFragment implements
 				startActivity(messageSender);
 
 				break;
-			case 1: // Schedule
-				Toast.makeText(mainActivity, "Schedule not implemented",
-						Toast.LENGTH_SHORT).show();
-				break;
-			case 2: // Edit
+//			case 1: // Schedule
+//				Toast.makeText(mainActivity, "Schedule not implemented",
+//						Toast.LENGTH_SHORT).show();
+//				break;
+			case 1: // Edit
 
 				Intent intent = new Intent(mainActivity, EditSMSTemplate.class);
 				intent.putExtra("message_id", message_id);
 				startActivity(intent);
 
 				break;
-			case 3: // Delete
+			case 2: // Delete
 				AlertDialogFragment dialog = AlertDialogFragment.newInstance(
 						"Are you sure to delete this template?", "Confirm ",
 						message_id);
