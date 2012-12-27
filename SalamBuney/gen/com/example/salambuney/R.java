@@ -78,7 +78,7 @@ public final class R {
         public static final int activity_templates=0x7f030005;
         public static final int contact_edit=0x7f030006;
         public static final int contact_new=0x7f030007;
-        public static final int message_options_dialog=0x7f030008;
+        public static final int message_prompt=0x7f030008;
         public static final int row_template=0x7f030009;
         public static final int table_row_template=0x7f03000a;
         public static final int table_row_template_history=0x7f03000b;

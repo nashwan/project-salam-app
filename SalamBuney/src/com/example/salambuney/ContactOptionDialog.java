@@ -46,7 +46,7 @@ public class ContactOptionDialog extends DialogFragment implements
 
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(
 				this.getActivity(), android.R.layout.simple_list_item_1, cols);
-		View v = inflater.inflate(R.layout.message_options_dialog, container,
+		View v = inflater.inflate(R.layout.message_prompt, container,
 				false);
 
 		ListView list = (ListView) v.findViewById(R.id.listMessageOptions);
