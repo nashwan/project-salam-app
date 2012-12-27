@@ -183,7 +183,7 @@ public class MessageSender extends Activity implements OnClickListener {
 		}
 	}
 
-	public boolean storeInHistory(String message) {
+	public boolean storeInHistory(String message, String numbers) {
 		try {
 
 			SimpleDateFormat dateFormat = new SimpleDateFormat(
@@ -194,7 +194,8 @@ public class MessageSender extends Activity implements OnClickListener {
 			ContentValues values = new ContentValues();
 			values.put(SalaamDB.HISTORY_MESSAGE, message);
 			values.put(SalaamDB.HISTORY_SENT_TIME, strDate);
-
+			values.put(SalaamDB.HISTORY_CONATCT, numbers);
+			
 			Uri uri = getContentResolver().insert(
 					SalaamDBProvider.CONTENT_URI_HISTORY, values);
 			return true;
@@ -272,8 +273,15 @@ public class MessageSender extends Activity implements OnClickListener {
 							Toast.makeText(getBaseContext(), "SMS sent",
 									Toast.LENGTH_SHORT).show();
 
+							
+							String numbersstr = "";
+							for (int i = 0; i < totalNumbersToSent; i++) {
+
+								numbersstr = numbers[i];
+							}
+							
 							StoreSMS(smsTextToSent, smsNumber);
-							storeInHistory(smsTextToSent);
+							storeInHistory(smsTextToSent,numbersstr );
 
 							break;
 						case SmsManager.RESULT_ERROR_GENERIC_FAILURE:
