@@ -36,7 +36,7 @@ public class HistoryArrayAdapter extends ArrayAdapter<History> {
 		if (history != null) {
 			LinearLayout layout = (LinearLayout) v
 					.findViewById(R.id.layoutForSingleHistory);
-
+			layout.setClickable(false);
 			TextView message = (TextView) v.findViewById(R.id.textMessage);
 			TextView time = (TextView) v.findViewById(R.id.textTime);
 			

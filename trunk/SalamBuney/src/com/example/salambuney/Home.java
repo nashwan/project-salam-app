@@ -75,8 +75,7 @@ public class Home extends Activity implements OnClickListener,
 			messageTV.setLayoutParams(new LayoutParams(
 					LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT, 1));
 
-			messageTV.setTextSize(17);
-			messageTV.setTypeface(Typeface.DEFAULT_BOLD);
+			messageTV.setTextSize(18);
 			messageTV.setPadding(4, 4, 2, 4);
 			messageTV.setGravity(Gravity.TOP);
 			// messageTV.setTextColor(Color.parseColor("#05407b"));

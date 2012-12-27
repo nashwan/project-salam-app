@@ -43,16 +43,6 @@ public class MessageSender extends Activity implements OnClickListener {
 	int totalNumbersToSent = 0;
 	boolean messageSent;
 
-	@Override
-	public void finish() {
-
-		Intent intent = new Intent(this, MainActivity.class);
-		intent.putExtra("tab", 0);
-		startActivity(intent);
-		super.finish();
-
-	}
-
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
@@ -195,7 +185,7 @@ public class MessageSender extends Activity implements OnClickListener {
 			values.put(SalaamDB.HISTORY_MESSAGE, message);
 			values.put(SalaamDB.HISTORY_SENT_TIME, strDate);
 			values.put(SalaamDB.HISTORY_CONATCT, numbers);
-			
+
 			Uri uri = getContentResolver().insert(
 					SalaamDBProvider.CONTENT_URI_HISTORY, values);
 			return true;
@@ -231,8 +221,6 @@ public class MessageSender extends Activity implements OnClickListener {
 					sendMessage(smsTextToSent, numbers[i]);
 				}
 
-				pd.cancel();
-
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -245,9 +233,15 @@ public class MessageSender extends Activity implements OnClickListener {
 		protected void onPostExecute(Void result) {
 			// TODO Auto-generated method stub
 
-			finish();
 			super.onPostExecute(result);
 
+			Intent intent = new Intent(getBaseContext(), MainActivity.class);
+			intent.putExtra("tab", 0);
+			startActivity(intent);
+
+
+			pd.cancel();
+			finish();
 		}
 
 		protected void onPreExecute() {
@@ -273,15 +267,14 @@ public class MessageSender extends Activity implements OnClickListener {
 							Toast.makeText(getBaseContext(), "SMS sent",
 									Toast.LENGTH_SHORT).show();
 
-							
 							String numbersstr = "";
 							for (int i = 0; i < totalNumbersToSent; i++) {
 
 								numbersstr = numbers[i];
 							}
-							
+
 							StoreSMS(smsTextToSent, smsNumber);
-							storeInHistory(smsTextToSent,numbersstr );
+							storeInHistory(smsTextToSent, numbersstr);
 
 							break;
 						case SmsManager.RESULT_ERROR_GENERIC_FAILURE:
@@ -304,7 +297,9 @@ public class MessageSender extends Activity implements OnClickListener {
 							break;
 
 						}
+
 						getApplication().unregisterReceiver(this);
+
 					}
 
 				}, new IntentFilter(SENT));
