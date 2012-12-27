@@ -7,12 +7,12 @@
         android:key="message"
         android:summary="Message in Salam"
         android:title="Message" /> -->
-    <EditTextPreference
+    <!-- <EditTextPreference
         android:dialogMessage="Enter mobile number to send sms to"
         android:dialogTitle="Mobile Number"
         android:key="mobile"
         android:summary="Mobile phone to which sms will be sent"
-        android:title="Phone Number " />
+        android:title="Phone Number " /> -->
 
     <com.example.salambuney.TimePreference
         android:dialogMessage="Gadijehey Time"

@@ -4,6 +4,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+
+        <ListView
+            android:id="@+id/listHistory"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:clickable="false" />
+
+
+    <!--
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="fill_parent"
@@ -22,5 +33,6 @@
             </TableLayout>
         </LinearLayout>
     </ScrollView>
+    -->
 
 </LinearLayout>

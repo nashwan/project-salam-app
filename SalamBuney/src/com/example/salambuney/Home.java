@@ -32,7 +32,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.TableRow.LayoutParams;
 
-public class Home extends Activity implements OnClickListener {
+public class Home extends Activity implements OnClickListener,
+		OnDialogDoneListener {
 
 	public String smsTextToSent;
 
@@ -61,7 +62,7 @@ public class Home extends Activity implements OnClickListener {
 			// create new row
 			TableRow tr = new TableRow(this);
 			tr.setTag(message_id);
-			tr.setPadding(3, 2, 3, 2);
+			tr.setPadding(5, 1, 5, 1);
 
 			tr.setClickable(true);
 			tr.setOnClickListener(this);
@@ -75,7 +76,7 @@ public class Home extends Activity implements OnClickListener {
 
 			messageTV.setTextSize(17);
 			messageTV.setTypeface(Typeface.DEFAULT_BOLD);
-			messageTV.setPadding(4, 8, 2, 4);
+			messageTV.setPadding(4, 4, 2, 4);
 			messageTV.setGravity(Gravity.TOP);
 			// messageTV.setTextColor(Color.parseColor("#05407b"));
 
@@ -88,7 +89,7 @@ public class Home extends Activity implements OnClickListener {
 			templatesTL.addView(tr);
 
 		}
- 
+
 	}
 
 	@Override
@@ -110,5 +111,30 @@ public class Home extends Activity implements OnClickListener {
 		return managedQuery(SalaamDBProvider.CONTENT_URI_TEMPLATES,
 				SalaamDBProvider.FROM_TEMPLATE_TABLE, null, null, null);
 	}
-	
+
+	@Override
+	public void onDialogDone(String tag, boolean cancelled, CharSequence message) {
+		// TODO Auto-generated method stub
+		try {
+
+			if (!cancelled) {
+
+				int deletedCount = getContentResolver().delete(
+						SalaamDBProvider.CONTENT_URI_TEMPLATES,
+						SalaamDB.TEMPLATE_ID + "=" + message, null);
+
+				TableLayout templatesTL = (TableLayout) findViewById(R.id.listTemplates);
+				templatesTL.removeAllViews();
+				showTemplates(getData());
+
+				Toast.makeText(this, "Template deleted.", Toast.LENGTH_SHORT)
+						.show();
+
+			}
+
+		} catch (Exception ex) {
+			Toast.makeText(this, "Delete failed.", Toast.LENGTH_SHORT).show();
+		}
+	}
+
 }
