@@ -58,6 +58,10 @@ public class MainActivity extends TabActivity {
 	        TextView tv = (TextView) tabHost.getTabWidget().getChildAt(i).findViewById(android.R.id.title);
 	        tv.setTextColor(Color.parseColor("#cae5ff"));
 	    }
+		
+		Intent intent = getIntent();
+		int selectTab = intent.getIntExtra("tab", 0);
+		tabHost.setCurrentTab(selectTab);
 
 
 	}

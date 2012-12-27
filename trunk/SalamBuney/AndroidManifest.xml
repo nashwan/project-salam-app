@@ -53,6 +53,11 @@
             android:name="com.example.salambuney.NewContact"
             android:label="New Contact" >
         </activity>
+        
+         <activity
+            android:name="com.example.salambuney.EditContact"
+            android:label="Edit Contact" >
+        </activity>
         <activity
             android:name="com.example.salambuney.MessageSender"
             android:label="Send Message" >

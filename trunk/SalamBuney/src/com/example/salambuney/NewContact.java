@@ -62,6 +62,7 @@ public class NewContact extends Activity implements OnClickListener {
 			getContentResolver().insert(SalaamDBProvider.CONTENT_URI_CONTACT,
 					values);
 			Intent intentMain = new Intent(this, MainActivity.class);
+			intentMain.putExtra("tab", 1);
 			startActivity(intentMain);
 			finish();
 
