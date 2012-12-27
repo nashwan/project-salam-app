@@ -19,6 +19,7 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.FragmentActivity;
 import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.Gravity;
@@ -102,7 +103,8 @@ public class Home extends Activity implements OnClickListener,
 					.getTag().toString());
 			FragmentManager fm = getFragmentManager();
 			FragmentTransaction ft = fm.beginTransaction();
-			mdf.show(ft, "my-dialog-tag");
+
+			mdf.show(getFragmentManager(), "Exiting");
 		}
 
 	}

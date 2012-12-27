@@ -37,9 +37,11 @@ public class MessageOptionsDialogue extends DialogFragment implements
 
 	public static MessageOptionsDialogue newInstance(String messageId) {
 		MessageOptionsDialogue pdf = new MessageOptionsDialogue();
-		pdf.setStyle(STYLE_NO_TITLE, 0);
+		pdf.setStyle(STYLE_NO_TITLE,0);
 		Bundle bundle = new Bundle();
+		
 		bundle.putString("message_id", messageId);
+		bundle.putString("title", "Message Option");
 		pdf.setArguments(bundle);
 		return pdf;
 	}
@@ -56,13 +58,13 @@ public class MessageOptionsDialogue extends DialogFragment implements
 
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(
 				this.getActivity(), android.R.layout.simple_list_item_1, cols);
-		View v = inflater.inflate(R.layout.message_options_dialog, container,
+		View v = inflater.inflate(R.layout.message_prompt, container,
 				false);
 
 		ListView list = (ListView) v.findViewById(R.id.listMessageOptions);
 		list.setTag(message_id);
 		list.setLayoutParams(new LayoutParams(
-				android.view.ViewGroup.LayoutParams.MATCH_PARENT,
+				android.view.ViewGroup.LayoutParams.FILL_PARENT,
 				android.view.ViewGroup.LayoutParams.WRAP_CONTENT));
 		list.setAdapter(adapter);
 		list.setOnItemClickListener(this);
