@@ -41,6 +41,7 @@ public class MessageSender extends Activity implements OnClickListener {
 	private String smsTextToSent, smsNumber;
 	String[] numbers;
 	int totalNumbersToSent = 0;
+	boolean messageSent;
 
 	@Override
 	public void finish() {
@@ -262,25 +263,18 @@ public class MessageSender extends Activity implements OnClickListener {
 			String SENT = "SMS_SENT";
 			String DELIVERED = "SMS_DELIVERED";
 			try {
-
-				PendingIntent sentPI = PendingIntent.getBroadcast(ctx, 0,
-						new Intent(SENT), 0);
-
-				PendingIntent deliveryPI = PendingIntent.getBroadcast(ctx, 0,
-						new Intent(DELIVERED), 0);
-
 				// ---when the SMS has been sent---
-				registerReceiver(new BroadcastReceiver() {
+				getApplication().registerReceiver(new BroadcastReceiver() {
 					@Override
 					public void onReceive(Context context, Intent arg1) {
 						switch (getResultCode()) {
 						case Activity.RESULT_OK:
-							Toast.makeText(getBaseContext(), "SMS delivered",
+							Toast.makeText(getBaseContext(), "SMS sent",
 									Toast.LENGTH_SHORT).show();
-							
+
 							StoreSMS(smsTextToSent, smsNumber);
 							storeInHistory(smsTextToSent);
-							
+
 							break;
 						case SmsManager.RESULT_ERROR_GENERIC_FAILURE:
 							Toast.makeText(context, "Generic failure",
@@ -302,13 +296,18 @@ public class MessageSender extends Activity implements OnClickListener {
 							break;
 
 						}
-
+						getApplication().unregisterReceiver(this);
 					}
 
 				}, new IntentFilter(SENT));
 
+				PendingIntent sentPI = PendingIntent.getBroadcast(ctx, 0,
+						new Intent(SENT), 0);
+				PendingIntent deliveredPI = PendingIntent.getBroadcast(ctx, 0,
+						new Intent(DELIVERED), 0);
+
 				// ---when the SMS delivery report is recieved--
-				registerReceiver(new BroadcastReceiver() {
+				getApplication().registerReceiver(new BroadcastReceiver() {
 					@Override
 					public void onReceive(Context context, Intent arg1) {
 						switch (getResultCode()) {
@@ -326,6 +325,8 @@ public class MessageSender extends Activity implements OnClickListener {
 							break;
 						}
 
+						getApplication().unregisterReceiver(this);
+
 					}
 
 				}, new IntentFilter(DELIVERED));
@@ -333,7 +334,7 @@ public class MessageSender extends Activity implements OnClickListener {
 				// send sms
 				SmsManager sms = SmsManager.getDefault();
 				sms.sendTextMessage(smsNumber, null, smsTextToSent, sentPI,
-						deliveryPI);
+						deliveredPI);
 
 				return true;
 			} catch (Exception ex) {
