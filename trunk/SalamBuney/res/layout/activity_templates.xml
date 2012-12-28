@@ -2,8 +2,17 @@
     android:id="@+id/main_content_container"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#dbe7f1" >
-
+        android:layout_marginBottom="5dp"
+    android:layout_marginTop="2dp"
+     >
+  <TextView
+        android:id="@+id/tvInforTemplates"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:visibility="gone"
+        android:text="No message templates found, templates can be added through the menu option."
+        android:textColor="#4c4c4c" />
     
    
     <ScrollView

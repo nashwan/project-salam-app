@@ -1,48 +1,32 @@
-package com.example.salambuney;
+package templates;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
+import com.example.salambuney.OnDialogDoneListener;
+import com.example.salambuney.R;
+import com.example.salambuney.SalaamDB;
+import com.example.salambuney.SalaamDBProvider;
 import android.app.Activity;
-import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
-import android.content.ContentValues;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.graphics.Typeface;
-import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.support.v4.app.FragmentActivity;
-import android.telephony.SmsManager;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.TableRow.LayoutParams;
 
-public class Home extends Activity implements OnClickListener,
+public class Templates extends Activity implements OnClickListener,
 		OnDialogDoneListener {
 
 	public String smsTextToSent;
 
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_templates);
-
 		try {
 			showTemplates(getData());
 		} catch (Exception ex) {
@@ -51,10 +35,17 @@ public class Home extends Activity implements OnClickListener,
 
 	}
 
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		showTemplates(getData());
+	}
+
 	private void showTemplates(Cursor cursor) {
 
 		TableLayout templatesTL = (TableLayout) findViewById(R.id.listTemplates);
-
+		templatesTL.removeAllViews();
 		while (cursor.moveToNext()) {
 
 			String message = cursor.getString(1);
@@ -63,7 +54,7 @@ public class Home extends Activity implements OnClickListener,
 			// create new row
 			TableRow tr = new TableRow(this);
 			tr.setTag(message_id);
-			tr.setPadding(5, 1, 5, 1);
+			tr.setPadding(5, 0, 5, 1);
 
 			tr.setClickable(true);
 			tr.setOnClickListener(this);
@@ -76,11 +67,9 @@ public class Home extends Activity implements OnClickListener,
 					LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT, 1));
 
 			messageTV.setTextSize(18);
-			messageTV.setPadding(4, 4, 2, 4);
+			messageTV.setPadding(8, 4, 2, 4);
 			messageTV.setGravity(Gravity.TOP);
-			// messageTV.setTextColor(Color.parseColor("#05407b"));
 
-			// messageTV.setBackgroundColor(Color.parseColor("#c8e3fe"));
 			messageTV.setText(message); // set message
 			messageTV.setTag(message_id);
 			messageTV.setOnClickListener(this);
@@ -90,11 +79,18 @@ public class Home extends Activity implements OnClickListener,
 
 		}
 
+		TextView info = (TextView) findViewById(R.id.tvInforTemplates);
+		if (cursor.getCount() == 0) {
+
+			info.setVisibility(View.VISIBLE);
+		} else {
+			info.setVisibility(View.GONE);
+		}
+
 	}
 
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
 
 		if (v.getTag() != null) {
 
@@ -115,7 +111,7 @@ public class Home extends Activity implements OnClickListener,
 
 	@Override
 	public void onDialogDone(String tag, boolean cancelled, CharSequence message) {
-		// TODO Auto-generated method stub
+
 		try {
 
 			if (!cancelled) {
@@ -137,5 +133,4 @@ public class Home extends Activity implements OnClickListener,
 			Toast.makeText(this, "Delete failed.", Toast.LENGTH_SHORT).show();
 		}
 	}
-
 }

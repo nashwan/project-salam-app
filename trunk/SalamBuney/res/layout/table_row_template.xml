@@ -22,13 +22,14 @@
             android:paddingLeft="5dp"
             android:paddingTop="3dp"
             android:text="Medium Text"
-            android:textColor="#5c8ebf"
+            android:textColor="#3c1f08"
             android:textSize="18dp" />
 
         <TextView
             android:id="@+id/textPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="#4d4d4d"
             android:layout_weight="1"
             android:paddingLeft="5dp"
             android:paddingTop="3dp"

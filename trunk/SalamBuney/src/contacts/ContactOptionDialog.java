@@ -1,11 +1,10 @@
-package com.example.salambuney;
+package contacts;
 
+import com.example.salambuney.AlertDialogFragment;
+import com.example.salambuney.R;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.app.FragmentTransaction;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;

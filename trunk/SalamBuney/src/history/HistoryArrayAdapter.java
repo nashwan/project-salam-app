@@ -1,6 +1,8 @@
-package com.example.salambuney;
+package history;
 
 import java.util.ArrayList;
+
+import com.example.salambuney.R;
 import com.example.salambuney.models.History;
 
 import android.content.Context;
@@ -52,7 +54,7 @@ public class HistoryArrayAdapter extends ArrayAdapter<History> {
 			if(layout != null)
 			{
 				layout.setTag(history._ID);
-				//layout.setOnClickListener((OnClickListener) getContext());
+				layout.setOnClickListener((OnClickListener) getContext());
 			}
 		}
 		return v;

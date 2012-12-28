@@ -12,14 +12,12 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
@@ -49,7 +47,8 @@ public class MessageSender extends Activity implements OnClickListener {
 		setContentView(R.layout.activity_message_sender);
 
 		ActionBar bar = getActionBar();
-		bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#064682")));
+		bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#790404")));
+		bar.setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE);
 
 		tvMessageOnSender = (TextView) findViewById(R.id.tvMessageOnSender);
 		listPhoneNumbers = (LinearLayout) findViewById(R.id.layoutPhoneNumbers);
@@ -88,7 +87,7 @@ public class MessageSender extends Activity implements OnClickListener {
 						+ cursor2.getString(2));
 				checkBox.setChecked(true);
 				checkBox.setTag(cursor2.getString(2));
-				checkBox.setTextColor(Color.parseColor("#032f5b"));
+				checkBox.setTextColor(Color.parseColor("#4f290b"));
 				checkBox.setBackgroundResource(R.drawable.template_row_default);
 				listPhoneNumbers.addView(checkBox);
 
@@ -216,10 +215,26 @@ public class MessageSender extends Activity implements OnClickListener {
 
 			try {
 
-				for (int i = 0; i < totalNumbersToSent; i++) {
+				boolean sentSuccessfully = false;
+				for (int i = 0; i < numbers.length; i++) {
 
-					sendMessage(smsTextToSent, numbers[i]);
+					if (numbers[i] != null)
+						sentSuccessfully = sendMessage(smsTextToSent,
+								numbers[i]);
 				}
+
+				String numbersstr = "";
+				for (int i = 0; i < numbers.length; i++) {
+
+					if (numbers[i] != null) {
+						if (i == 0)
+							numbersstr = numbers[i];
+						else
+							numbersstr += ", " + numbers[i];
+					}
+				}
+				if (sentSuccessfully)
+					storeInHistory(smsTextToSent, numbersstr);
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -239,14 +254,13 @@ public class MessageSender extends Activity implements OnClickListener {
 			intent.putExtra("tab", 0);
 			startActivity(intent);
 
-
 			pd.cancel();
 			finish();
 		}
 
 		protected void onPreExecute() {
 
-			pd = ProgressDialog.show(ctx, "Message Sender", "In Progress...",
+			pd = ProgressDialog.show(ctx, "Message Sender", "please wait...",
 					true);
 		}
 
@@ -267,14 +281,7 @@ public class MessageSender extends Activity implements OnClickListener {
 							Toast.makeText(getBaseContext(), "SMS sent",
 									Toast.LENGTH_SHORT).show();
 
-							String numbersstr = "";
-							for (int i = 0; i < totalNumbersToSent; i++) {
-
-								numbersstr = numbers[i];
-							}
-
 							StoreSMS(smsTextToSent, smsNumber);
-							storeInHistory(smsTextToSent, numbersstr);
 
 							break;
 						case SmsManager.RESULT_ERROR_GENERIC_FAILURE:

@@ -2,17 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="5dp"
+    android:layout_marginTop="2dp"
     android:orientation="vertical" >
 
+    <TextView
+        android:id="@+id/tvInforHistory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:visibility="gone"
+        android:text="No history items found."
+        android:textColor="#4c4c4c" />
 
-        <ListView
-            android:id="@+id/listHistory"
-            android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:clickable="false" />
-
+    <ListView
+        android:id="@+id/listHistory"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:clickable="false" />
 
     <!--
     <ScrollView

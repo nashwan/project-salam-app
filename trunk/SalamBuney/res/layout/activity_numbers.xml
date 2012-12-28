@@ -3,11 +3,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="5dp"
-    android:layout_marginTop="5dp"
-    android:background="#dbe7f1"
+    android:layout_marginTop="2dp"
     android:orientation="vertical" >
 
-
+    <TextView
+        android:id="@+id/tvInforNumbers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:visibility="gone"
+        android:textColor="#4c4c4c"
+        android:text="No contacts found, contacts can be added through the menu option."
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <ListView
             android:id="@+id/listNumbers"

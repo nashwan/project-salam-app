@@ -17,7 +17,8 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.example.salambuney.MainActivity"
+            android:name="com.example.salambuney.SplashScreen"
+            android:theme="@android:style/Theme.NoTitleBar"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,42 +26,47 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+         <activity
+            android:name="com.example.salambuney.MainActivity"
+            android:label="@string/app_name" >
+           
+        </activity>
         <activity
             android:name="com.example.salambuney.SettingsActivity"
             android:label="@string/title_activity_settings" >
         </activity>
         <activity
-            android:name="com.example.salambuney.NewSMSTemplate"
+            android:name="templates.NewSMSTemplate"
             android:label="New Template" >
         </activity>
         <activity
-            android:name="com.example.salambuney.EditSMSTemplate"
+            android:name="templates.EditSMSTemplate"
             android:label="Edit Template" >
         </activity>
         <activity
-            android:name="com.example.salambuney.Home"
+            android:name="templates.Templates"
             android:label="Templates" >
         </activity>
         <activity
-            android:name="com.example.salambuney.Numbers"
-            android:label="Templates" >
-        </activity>
-        <activity
-            android:name="com.example.salambuney.History"
+            android:name="history.History"
             android:label="History" >
         </activity>
         <activity
-            android:name="com.example.salambuney.NewContact"
+            android:name="contacts.NewContact"
             android:label="New Contact" >
         </activity>
-        
-         <activity
-            android:name="com.example.salambuney.EditContact"
+        <activity
+            android:name="contacts.EditContact"
             android:label="Edit Contact" >
         </activity>
         <activity
             android:name="com.example.salambuney.MessageSender"
             android:label="Send Message" >
+        </activity>
+        <activity
+            android:name="contacts.Numbers"
+            android:label="Numbers" >
         </activity>
 
         <provider
@@ -69,7 +75,6 @@
             android:label="My templates"
             android:multiprocess="true" >
         </provider>
-    
     </application>
 
 </manifest>
