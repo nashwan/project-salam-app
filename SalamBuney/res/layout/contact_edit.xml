@@ -2,18 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff0e4"
+  
     android:orientation="vertical" >
 
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp" >
+        android:layout_margin="10dp"
+         >
 
         <TableRow
             android:id="@+id/tableRow1"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp" >
+            android:layout_marginTop="5dp" >
 
             <TextView
                 android:id="@+id/textView1"
@@ -21,14 +24,17 @@
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:text="Name"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#3c1f08" />
 
-            <EditText
+            
+             <EditText
                 android:id="@+id/etPersonNameEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName" >
+                android:inputType="textPersonName"
+                android:textColor="#484847" >
 
                 <requestFocus />
             </EditText>
@@ -36,9 +42,9 @@
 
         <TableRow
             android:id="@+id/tableRow2"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp" >
+            android:layout_marginTop="5dp" >
 
             <TextView
                 android:id="@+id/textView2"
@@ -46,21 +52,23 @@
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:text="Phone Number"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#3c1f08" />
 
             <EditText
                 android:id="@+id/etPhoneNumberEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="number" />
+                android:inputType="number"
+                android:textColor="#484847" />
         </TableRow>
 
         <TableRow
             android:id="@+id/tableRow3"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp" >
+            android:layout_marginTop="10dp" >
 
             <Button
                 android:id="@+id/btnCancelContactEdit"

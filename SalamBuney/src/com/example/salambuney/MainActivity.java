@@ -1,5 +1,9 @@
 package com.example.salambuney;
 
+import history.History;
+import contacts.Numbers;
+import templates.Templates;
+import templates.NewSMSTemplate;
 import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.TabActivity;
@@ -21,18 +25,21 @@ public class MainActivity extends TabActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
 
+		setContentView(R.layout.activity_main);
+		//
 		ActionBar bar = getActionBar();
-		bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#064682")));
+		bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#790404")));
+		bar.setSubtitle("kuru city");
+		bar.setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE);
 
 		// Create tabs
 		TabHost tabHost = (TabHost) findViewById(android.R.id.tabhost);
 
-		// Tab for Home
+		// Tab for Templates
 		TabSpec homeSpec = tabHost.newTabSpec("templates");
-		homeSpec.setIndicator("Templates");
-		Intent homeIntent = new Intent(this, Home.class);
+		homeSpec.setIndicator("Messages");
+		Intent homeIntent = new Intent(this, Templates.class);
 		homeSpec.setContent(homeIntent);
 
 		// Tab for Numbers
@@ -52,17 +59,17 @@ public class MainActivity extends TabActivity {
 		tabHost.addTab(homeSpec);
 		tabHost.addTab(numberSpec);
 		tabHost.addTab(historySpec);
-		
-		for(int i=0;i<tabHost.getTabWidget().getChildCount();i++) 
-	    {
-	        TextView tv = (TextView) tabHost.getTabWidget().getChildAt(i).findViewById(android.R.id.title);
-	        tv.setTextColor(Color.parseColor("#cae5ff"));
-	    }
-		
+
+		for (int i = 0; i < tabHost.getTabWidget().getChildCount(); i++) {
+			TextView tv = (TextView) tabHost.getTabWidget().getChildAt(i)
+					.findViewById(android.R.id.title);
+			tv.setTextColor(Color.parseColor("#ffebeb"));
+			tv.setTextSize(13);
+		}
+
 		Intent intent = getIntent();
 		int selectTab = intent.getIntExtra("tab", 0);
 		tabHost.setCurrentTab(selectTab);
-
 
 	}
 
@@ -76,21 +83,21 @@ public class MainActivity extends TabActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 
-//		if (item.getItemId() == R.id.menu_settings) {
-//
-//			Intent intent = new Intent();
-//			intent.setClass(this, SettingsActivity.class);
-//			startActivity(intent);
-//
-//		}
+		// if (item.getItemId() == R.id.menu_settings) {
+		//
+		// Intent intent = new Intent();
+		// intent.setClass(this, SettingsActivity.class);
+		// startActivity(intent);
+		//
+		// }
 
-		 if (item.getItemId() == R.id.menu_new_template) {
-		
-			 Intent intent = new Intent();
-			 intent.setClass(this, NewSMSTemplate.class);
-			 startActivity(intent);
-		
-		 }
+		if (item.getItemId() == R.id.menu_new_template) {
+
+			Intent intent = new Intent();
+			intent.setClass(this, NewSMSTemplate.class);
+			startActivity(intent);
+
+		}
 
 		return super.onOptionsItemSelected(item);
 	}

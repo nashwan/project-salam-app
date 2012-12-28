@@ -1,5 +1,8 @@
-package com.example.salambuney;
+package contacts;
 
+import com.example.salambuney.R;
+import com.example.salambuney.SalaamDB;
+import com.example.salambuney.SalaamDBProvider;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.ContentValues;
@@ -19,7 +22,7 @@ public class EditContact extends Activity implements OnClickListener {
 
 	Button btnCancel, btnSave;
 	EditText etPersonName, etPhoneNumber;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -27,8 +30,8 @@ public class EditContact extends Activity implements OnClickListener {
 		setContentView(R.layout.contact_edit);
 
 		ActionBar bar = getActionBar();
-		bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#064682")));
-
+		bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#790404")));
+		bar.setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE);
 		// buttons
 		btnCancel = (Button) findViewById(R.id.btnCancelContactEdit);
 		btnSave = (Button) findViewById(R.id.btnSaveContactEdit);
@@ -38,7 +41,7 @@ public class EditContact extends Activity implements OnClickListener {
 		// textviews
 		etPersonName = (EditText) findViewById(R.id.etPersonNameEdit);
 		etPhoneNumber = (EditText) findViewById(R.id.etPhoneNumberEdit);
-		
+
 		Intent intent = getIntent();
 		String contact_id = intent.getStringExtra("contact_id");
 
@@ -73,29 +76,31 @@ public class EditContact extends Activity implements OnClickListener {
 				String number = etPhoneNumber.getText().toString();
 				String id = etPhoneNumber.getTag().toString();
 
-				ContentValues values = new ContentValues();
+				if (personName.trim().length() > 0
+						&& number.trim().length() > 6) {
+					ContentValues values = new ContentValues();
 
-				values.put(SalaamDB.CONTACT_ID, id);
-				values.put(SalaamDB.CONTACT_NAME, personName);
-				values.put(SalaamDB.CONTACT_PHONE, number);
-				
-				getContentResolver().update(
-						SalaamDBProvider.CONTENT_URI_CONTACT, values,
-						"_id=" + id, null);
-				Intent intentMain = new Intent(this, MainActivity.class);
-				intentMain.putExtra("tab", 1);
-				startActivity(intentMain);
+					values.put(SalaamDB.CONTACT_ID, id);
+					values.put(SalaamDB.CONTACT_NAME, personName);
+					values.put(SalaamDB.CONTACT_PHONE, number);
 
-				Toast.makeText(this, "Contact update successful.",
-						Toast.LENGTH_SHORT).show();
+					getContentResolver().update(
+							SalaamDBProvider.CONTENT_URI_CONTACT, values,
+							"_id=" + id, null);
+					Toast.makeText(this, "Contact update successful.",
+							Toast.LENGTH_SHORT).show();
 
-				finish();
+					finish();
+				} else {
+					Toast.makeText(
+							this,
+							"Ensure you have provided a name and a 7 digit phone number.",
+							Toast.LENGTH_SHORT).show();
+				}
 
 				break;
 			case R.id.btnCancelContactEdit:
-				Intent intent = new Intent(this, MainActivity.class);
-				startActivity(intent);
-				intent.putExtra("tab", 1);
+
 				finish();
 				break;
 			}

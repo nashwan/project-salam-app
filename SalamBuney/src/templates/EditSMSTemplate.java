@@ -1,5 +1,8 @@
-package com.example.salambuney;
+package templates;
 
+import com.example.salambuney.R;
+import com.example.salambuney.SalaamDB;
+import com.example.salambuney.SalaamDBProvider;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.ContentValues;
@@ -29,9 +32,9 @@ public class EditSMSTemplate extends Activity implements OnClickListener {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.template_edit);
-
 		ActionBar bar = getActionBar();
-		bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#064682")));
+		bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#790404")));
+		bar.setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE);
 
 		// buttons
 		btnCancel = (Button) findViewById(R.id.btnCancelEditSMS);
@@ -78,26 +81,29 @@ public class EditSMSTemplate extends Activity implements OnClickListener {
 
 				String message = etMessageText.getText().toString();
 				String id = etMessageText.getTag().toString();
+				if (message.trim().length() > 0) {
 
-				ContentValues values = new ContentValues();
+					ContentValues values = new ContentValues();
 
-				values.put(SalaamDB.TEMPLATE_ID, id);
-				values.put(SalaamDB.TEMPLATE_MESSAGE, message);
-				getContentResolver().update(
-						SalaamDBProvider.CONTENT_URI_TEMPLATES, values,
-						"_id=" + id, null);
-				Intent intentMain = new Intent(this, MainActivity.class);
-				startActivity(intentMain);
+					values.put(SalaamDB.TEMPLATE_ID, id);
+					values.put(SalaamDB.TEMPLATE_MESSAGE, message);
+					getContentResolver().update(
+							SalaamDBProvider.CONTENT_URI_TEMPLATES, values,
+							"_id=" + id, null);
+					
+					Toast.makeText(this, "Tempalate update successful.",
+							Toast.LENGTH_SHORT).show();
 
-				Toast.makeText(this, "Tempalate update successful.",
-						Toast.LENGTH_SHORT).show();
-
-				finish();
+					finish();
+				}
+				else
+				{
+					Toast.makeText(this, "Enter a message.", Toast.LENGTH_SHORT).show();
+				}
 
 				break;
 			case R.id.btnCancelEditSMS:
-				Intent intent = new Intent(this, MainActivity.class);
-				startActivity(intent);
+				
 				finish();
 				break;
 			}

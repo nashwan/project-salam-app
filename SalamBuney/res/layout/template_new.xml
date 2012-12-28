@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff0e4"
     android:orientation="vertical" >
 
     <TableLayout
@@ -20,13 +21,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Message"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#3c1f08" />
 
             <EditText
                 android:id="@+id/etNewSMSMessageText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:textColor="#484847"
                 android:inputType="textMultiLine" >
 
                 <requestFocus />

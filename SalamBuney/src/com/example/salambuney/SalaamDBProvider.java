@@ -20,7 +20,7 @@ public class SalaamDBProvider extends ContentProvider {
 
 	// message template table related
 	public static final String[] FROM_TEMPLATE_TABLE = { "_id", "message" };
-	public static final String[] FROM_HISTORY_TABLE = { "_id", "message", "sent_time" };
+	public static final String[] FROM_HISTORY_TABLE = { "_id", "message", "sent_time","contact" };
 	public static final String[] FROM_CONTACT_TABLE = { "_id", "name", "phone" };
 	
 	

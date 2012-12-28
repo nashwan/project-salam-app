@@ -2,14 +2,15 @@
     android:id="@+id/main_content_container"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#dbe7f1" >
+    android:background="@drawable/bakground" >
 
  
     <TabHost
         android:id="@android:id/tabhost"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1" >
+        android:layout_weight="1" 
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,8 +21,8 @@
                 android:id="@android:id/tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#024a91" 
-                
+                android:background="#8d0000" 
+                android:scrollbarStyle="outsideInset"
                >
             </TabWidget>
 

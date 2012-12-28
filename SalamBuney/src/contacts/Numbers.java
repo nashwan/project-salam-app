@@ -1,7 +1,11 @@
-package com.example.salambuney;
+package contacts;
 
 import java.util.ArrayList;
 
+import com.example.salambuney.OnDialogDoneListener;
+import com.example.salambuney.R;
+import com.example.salambuney.SalaamDB;
+import com.example.salambuney.SalaamDBProvider;
 import com.example.salambuney.models.Contact;
 
 import android.app.Activity;
@@ -9,20 +13,15 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Color;
-import android.graphics.Typeface;
+import android.opengl.Visibility;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ListView;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.TableRow.LayoutParams;
 
 public class Numbers extends Activity implements OnClickListener,
 		OnDialogDoneListener {
@@ -33,12 +32,20 @@ public class Numbers extends Activity implements OnClickListener,
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_numbers);
-		showHistory(getData());
+		showNumbers(getData());
 
 		templatesTL = (ListView) findViewById(R.id.listNumbers);
 	}
 
-	private void showHistory(Cursor cursor) {
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+
+		showNumbers(getData());
+	}
+
+	private void showNumbers(Cursor cursor) {
 
 		int count = 0;
 
@@ -54,6 +61,14 @@ public class Numbers extends Activity implements OnClickListener,
 					person_name);
 			contacts.add(contact);
 
+		}
+
+		TextView info = (TextView) findViewById(R.id.tvInforNumbers);
+		if (cursor.getCount() == 0) {
+
+			info.setVisibility(View.VISIBLE);
+		} else {
+			info.setVisibility(View.GONE);
 		}
 
 		ListView templatesTL = (ListView) findViewById(R.id.listNumbers);
@@ -167,9 +182,7 @@ public class Numbers extends Activity implements OnClickListener,
 						SalaamDBProvider.CONTENT_URI_CONTACT,
 						SalaamDB.CONTACT_ID + "=" + message, null);
 
-				templatesTL = (ListView) findViewById(R.id.listNumbers);
-				
-				showHistory(getData());
+				showNumbers(getData());
 
 			}
 

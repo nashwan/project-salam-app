@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#dbe7f1"
+    android:background="@drawable/bakground"
     android:orientation="vertical" >
 
     <ScrollView
@@ -13,17 +13,19 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            android:alpha=".8" >
 
             <TextView
                 android:id="@+id/tvMessageOnSender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:alpha="1"
                 android:background="@drawable/template_row"
                 android:padding="5dp"
                 android:text="Large Text"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#004479" />
+                android:textColor="#3c1f08" />
         </LinearLayout>
     </ScrollView>
 
@@ -32,6 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
+        android:alpha=".8"
         android:background="@drawable/template_row_default"
         android:orientation="vertical" >
 
@@ -39,11 +42,11 @@
             android:id="@+id/text"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
+            android:alpha="1"
             android:padding="5dp"
             android:text="Select contact"
             android:textColor="#626262"
             android:textSize="16dp" />
-
     </LinearLayout>
 
     <TableRow
@@ -53,15 +56,13 @@
 
         <Button
             android:id="@+id/btnCancelMessageSender"
-            style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="Cancel" />
 
         <Button
             android:id="@+id/btnSendMessageSender"
-            style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="3"

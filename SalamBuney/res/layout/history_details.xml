@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp"
+    android:orientation="vertical"
+    android:background="#ffeaea" >
+
+    <TextView
+        android:id="@+id/tvHistoryDetailsMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Varah balive"
+        android:layout_margin="10dp"
+        android:layout_marginBottom="5dp"
+        android:textColor="#3c1f08"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+
+        <TableRow
+            android:id="@+id/tableRow3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/tvHistoryDetailsContactsLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_marginLeft="10dp"
+                android:textColor="#4d4d4d"
+                android:textAppearance="?android:attr/textAppearanceMedium" 
+                android:text="To:" />
+
+            <TextView
+                android:id="@+id/tvHistoryDetailsContacts"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="15dp"
+                android:textAppearance="?android:attr/textAppearanceSmall" 
+                android:layout_height="wrap_content"
+                android:text="7407760 Riffath" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/tvHistoryDetailsSentTimeLabel"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="10dp"
+                 android:textColor="#4d4d4d"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium" 
+                android:padding="5dp"
+                android:text="Sent:" />
+
+            <TextView
+                android:id="@+id/tvHistoryDetailsSentTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall" 
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="15dp"
+                android:text="5:08 pm, 27 Dec" />
+        </TableRow>
+    </TableLayout>
+
+</LinearLayout>

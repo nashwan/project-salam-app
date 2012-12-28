@@ -1,24 +1,13 @@
-package com.example.salambuney;
+package templates;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
+import com.example.salambuney.AlertDialogFragment;
+import com.example.salambuney.MessageSender;
+import com.example.salambuney.R;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.FragmentTransaction;
-import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
-import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.telephony.SmsManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,13 +15,11 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 import android.widget.TableLayout.LayoutParams;
 
 public class MessageOptionsDialogue extends DialogFragment implements
 		OnItemClickListener {
 
-	private String smsTextToSent;
 	private Activity mainActivity;
 
 	public static MessageOptionsDialogue newInstance(String messageId) {
