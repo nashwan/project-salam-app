@@ -150,27 +150,7 @@ public class Numbers extends Activity implements OnClickListener,
 				SalaamDBProvider.FROM_CONTACT_TABLE, null, null, null);
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_numbers, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-
-		if (item.getItemId() == R.id.menu_new_contact) {
-
-			Intent intent = new Intent();
-			intent.setClass(this, NewContact.class);
-			startActivity(intent);
-
-		}
-
-		return super.onOptionsItemSelected(item);
-	}
-
+	
 	@Override
 	public void onDialogDone(String tag, boolean cancelled, CharSequence message) {
 		// TODO Auto-generated method stub

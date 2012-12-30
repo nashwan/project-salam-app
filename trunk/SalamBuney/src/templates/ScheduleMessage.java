@@ -156,7 +156,7 @@ public class ScheduleMessage extends Activity implements OnClickListener {
 					timeToSentMessage.setMinutes(timePicker.getCurrentMinute());
 
 					SimpleDateFormat dateFormat = new SimpleDateFormat(
-							"HH:mm:ss");
+							"HH:mm aaa");
 					String strDate = dateFormat.format(timeToSentMessage);
 
 					Intent smsSchedular = new Intent(this,
