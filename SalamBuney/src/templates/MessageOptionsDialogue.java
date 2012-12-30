@@ -1,7 +1,6 @@
 package templates;
 
 import com.example.salambuney.AlertDialogFragment;
-import com.example.salambuney.MessageSender;
 import com.example.salambuney.R;
 import android.app.Activity;
 import android.app.DialogFragment;
@@ -16,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TableLayout.LayoutParams;
+import android.widget.Toast;
 
 public class MessageOptionsDialogue extends DialogFragment implements
 		OnItemClickListener {
@@ -40,8 +40,8 @@ public class MessageOptionsDialogue extends DialogFragment implements
 		super.onCreateView(inflater, container, savedInstanceState);
 
 		String message_id = getArguments().getString("message_id");
-		String[] cols = new String[] { "Send now", "Edit", "Delete" };
-//		String[] cols = new String[] { "Send now", "Schedule", "Edit", "Delete" };
+	//	String[] cols = new String[] { "Send now", "Edit", "Delete" };
+		String[] cols = new String[] { "Send now", "Schedule", "Edit", "Delete" };
 
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(
 				this.getActivity(), android.R.layout.simple_list_item_1, cols);
@@ -84,18 +84,21 @@ public class MessageOptionsDialogue extends DialogFragment implements
 				startActivity(messageSender);
 
 				break;
-//			case 1: // Schedule
-//				Toast.makeText(mainActivity, "Schedule not implemented",
-//						Toast.LENGTH_SHORT).show();
-//				break;
-			case 1: // Edit
+			case 1: // Schedule
+				Intent messageSchedule = new Intent(mainActivity,
+						ScheduleMessage.class);
+				messageSchedule.putExtra("message_id", message_id);
+				startActivity(messageSchedule);
+				
+				break;
+			case 2: // Edit
 
 				Intent intent = new Intent(mainActivity, EditSMSTemplate.class);
 				intent.putExtra("message_id", message_id);
 				startActivity(intent);
 
 				break;
-			case 2: // Delete
+			case 3: // Delete
 				AlertDialogFragment dialog = AlertDialogFragment.newInstance(
 						"Are you sure to delete this template?", "Confirm ",
 						message_id);

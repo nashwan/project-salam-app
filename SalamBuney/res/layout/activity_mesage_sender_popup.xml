@@ -1,0 +1,114 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_content_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+  >
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff7f7"
+        android:padding="10dp" >
+
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/tvMessageScheduledLabel"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="Message:"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#2c2c2c" />
+
+            <TextView
+                android:id="@+id/tvMessageScheduled"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="4dp"
+                android:text="I have fever, and i am still not feeling well, hope to get back tommor."
+                android:textColor="#484848"
+                android:textSize="16dp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:showDividers="middle" >
+
+            <TextView
+                android:id="@+id/tvRecipientScheduledLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="To:"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#2c2c2c" />
+
+            <TextView
+                android:id="@+id/tvRecipientScheduled"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="4dp"
+                android:text="Small Text"
+                android:textColor="#757373"
+                android:textSize="16dp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:showDividers="middle" >
+
+            <TextView
+                android:id="@+id/tvTimeScheduledLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="Time:"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#2c2c2c" />
+
+            <TextView
+                android:id="@+id/tvTimeScheduled"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="4dp"
+                android:text="Small Text"
+                android:textColor="#757373"
+                android:textSize="16dp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow3"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp" >
+
+            <Button
+                android:id="@+id/btnCancelSchedule"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                
+                android:layout_height="wrap_content"
+                android:text="Cancel" />
+
+            <Button
+                android:id="@+id/btnKeepSchedule"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Keep" />
+        </TableRow>
+    </TableLayout>
+
+</LinearLayout>

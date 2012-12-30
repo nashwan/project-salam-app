@@ -1,7 +1,15 @@
-package com.example.salambuney;
+package templates;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import com.example.salambuney.MainActivity;
+import com.example.salambuney.R;
+import com.example.salambuney.SalaamDB;
+import com.example.salambuney.SalaamDBProvider;
+import com.example.salambuney.R.drawable;
+import com.example.salambuney.R.id;
+import com.example.salambuney.R.layout;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -134,8 +142,7 @@ public class MessageSender extends Activity implements OnClickListener {
 
 				break;
 			case R.id.btnCancelMessageSender:
-				Intent intentMain = new Intent(this, MainActivity.class);
-				startActivity(intentMain);
+
 				finish();
 				break;
 			}
@@ -224,13 +231,17 @@ public class MessageSender extends Activity implements OnClickListener {
 				}
 
 				String numbersstr = "";
+				boolean firstOne = true;
 				for (int i = 0; i < numbers.length; i++) {
 
 					if (numbers[i] != null) {
-						if (i == 0)
+						if (firstOne) {
 							numbersstr = numbers[i];
-						else
+							firstOne = false;
+						} else {
 							numbersstr += ", " + numbers[i];
+
+						}
 					}
 				}
 				if (sentSuccessfully)
