@@ -2,14 +2,19 @@ package history;
 
 import java.util.ArrayList;
 
+import templates.NewSMSTemplate;
+
 import com.example.salambuney.AlertDialogFragment;
 import com.example.salambuney.OnDialogDoneListener;
 import com.example.salambuney.R;
 import com.example.salambuney.SalaamDB;
 import com.example.salambuney.SalaamDBProvider;
+
+import contacts.NewContact;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
@@ -82,36 +87,7 @@ public class History extends Activity implements OnDialogDoneListener,
 				SalaamDB.HISTORY_ID + " DESC");
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_history, menu);
-		return true;
-	}
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-
-		try {
-			if (item.getItemId() == R.id.menu_clear_history) {
-
-				// delete all the data from the history table.
-
-				AlertDialogFragment dialog = AlertDialogFragment.newInstance(
-						"Are you sure to delete all history?", "Confirm ", "");
-				FragmentTransaction ft = getFragmentManager()
-						.beginTransaction();
-				dialog.show(ft, "PROMPT");
-
-			}
-		} catch (Exception ex) {
-			Log.i("SALAAM", ex.toString());
-			Toast.makeText(this, "An error occured while deleting history.",
-					Toast.LENGTH_SHORT).show();
-		}
-
-		return super.onOptionsItemSelected(item);
-	}
 
 	@Override
 	public void onClick(View v) {
@@ -137,8 +113,12 @@ public class History extends Activity implements OnDialogDoneListener,
 
 				int deletedCount = getContentResolver().delete(
 						SalaamDBProvider.CONTENT_URI_HISTORY, null, null);
-				Toast.makeText(this, "Deleted all history.", Toast.LENGTH_SHORT)
-						.show();
+				if(deletedCount != 0)
+					Toast.makeText(this, "Deleted all history.", Toast.LENGTH_SHORT)
+							.show();
+				else
+					Toast.makeText(this, "History is empty.", Toast.LENGTH_SHORT)
+					.show();
 				showHistory(getData());
 
 			}
@@ -147,5 +127,38 @@ public class History extends Activity implements OnDialogDoneListener,
 			Toast.makeText(this, "Delete failed.", Toast.LENGTH_SHORT).show();
 		}
 	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.activity_history, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+
+
+		try {
+			if (item.getItemId() == R.id.menu_clear_history) {
+
+				// delete all the data from the history table.
+
+				AlertDialogFragment dialog = AlertDialogFragment.newInstance(
+						"Are you sure to delete all history?", "Confirm ", "");
+				FragmentTransaction ft = getFragmentManager()
+						.beginTransaction();
+				dialog.show(ft, "PROMPT");
+
+			}
+		} catch (Exception ex) {
+			Log.i("SALAAM", ex.toString());
+			Toast.makeText(this, "An error occured while deleting history.",
+					Toast.LENGTH_SHORT).show();
+		}
+
+		return super.onOptionsItemSelected(item);
+	}
+
 
 }

@@ -1,11 +1,13 @@
 package com.example.salambuney;
 
 import history.History;
+import contacts.NewContact;
 import contacts.Numbers;
 import templates.Templates;
 import templates.NewSMSTemplate;
 import android.os.Bundle;
 import android.app.ActionBar;
+import android.app.FragmentTransaction;
 import android.app.NotificationManager;
 import android.app.TabActivity;
 
@@ -13,10 +15,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import android.widget.TabHost;
+import android.widget.Toast;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 
@@ -26,7 +30,7 @@ public class MainActivity extends TabActivity {
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-		
+
 	}
 
 	public String smsTextToSent;
@@ -39,7 +43,7 @@ public class MainActivity extends TabActivity {
 		//
 		ActionBar bar = getActionBar();
 		bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#790404")));
-		bar.setSubtitle("kuru city");
+		// bar.setSubtitle("kuru city");
 		bar.setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE);
 
 		// Create tabs
@@ -107,6 +111,15 @@ public class MainActivity extends TabActivity {
 			startActivity(intent);
 
 		}
+
+		if (item.getItemId() == R.id.menu_new_contact) {
+
+			Intent intent = new Intent();
+			intent.setClass(this, NewContact.class);
+			startActivity(intent);
+
+		}
+
 
 		return super.onOptionsItemSelected(item);
 	}
