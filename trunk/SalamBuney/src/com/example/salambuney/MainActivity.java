@@ -6,8 +6,10 @@ import templates.Templates;
 import templates.NewSMSTemplate;
 import android.os.Bundle;
 import android.app.ActionBar;
+import android.app.NotificationManager;
 import android.app.TabActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -19,6 +21,13 @@ import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 
 public class MainActivity extends TabActivity {
+
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		
+	}
 
 	public String smsTextToSent;
 
