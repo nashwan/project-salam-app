@@ -15,7 +15,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical" >
 
-               <LinearLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -36,22 +36,22 @@
                     android:id="@+id/tvMessageOnSender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    
+                    android:paddingBottom="5dp"
                     android:paddingLeft="10dp"
-                     android:paddingTop="5dp"
-                     android:paddingBottom="5dp"
-                     android:paddingRight="10dp"
+                    android:paddingRight="10dp"
                     android:text="Large Text"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textColor="#3c1f08" />
             </LinearLayout>
-           
 
             <LinearLayout
                 android:id="@+id/layoutPhoneNumbers"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="10dp"
                 android:alpha=".8"
                 android:background="@drawable/template_row_default"
                 android:orientation="vertical" >
@@ -60,7 +60,8 @@
                     android:id="@+id/text"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
-                    android:padding="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:paddingLeft="5dp"
                     android:text="Select contact"
                     android:textColor="#626262"
                     android:textSize="16dp" />

@@ -35,17 +35,6 @@ public class ScheduleMessageInformation extends Activity implements OnClickListe
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		// NOTIFICATION
-//		NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-//		Notification notification = new Notification(R.drawable.ic_launcher,
-//				"SMS Sent - V.Salaam", System.currentTimeMillis());
-//
-//		notification.setLatestEventInfo(this, "SMS Sent - V.Salaam",
-//				"Salaam SMS sent.", null);
-//
-//		notification.defaults = Notification.DEFAULT_SOUND;
-//		notificationManager.notify(
-//				SharedConfig.NOTIFICATION_SMS_SCHEDULE_MESSAGE, notification);
 
 		// POP UP SCREEN
 		setContentView(R.layout.activity_mesage_sender_popup);

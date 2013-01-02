@@ -172,6 +172,11 @@ public class ScheduleMessage extends Activity implements OnClickListener {
 							SharedConfig.ALARM_SMS_SCHEDULE_MESSAGE,
 							smsSchedular, 0);
 
+					if(seconds >= 30)
+					{
+						seconds  =  seconds - 30;
+					}
+					
 					AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 					alarmManager.set(AlarmManager.RTC_WAKEUP,
 							System.currentTimeMillis() + (seconds * 1000),

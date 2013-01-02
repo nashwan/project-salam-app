@@ -1,34 +1,29 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <!--
-    <item
-        android:id="@+id/menu_new_template"
-        android:layout_width="wrap_content"
-        android:icon="@drawable/icon_plus"
-        android:orderInCategory="2"
-        android:showAsAction="always"
-        android:title="New SMS">
-    </item>
-    -->
     <item
         android:id="@+id/menu_new_template"
         android:orderInCategory="2"
         android:showAsAction="never"
         android:title="New Template"/>
-    
-    
-      <item
+    <item
         android:id="@+id/menu_new_contact"
         android:orderInCategory="2"
         android:showAsAction="never"
         android:title="New Phone Number"/>
-      
-    <!-- <item
+    <item
+        android:id="@+id/menu_information"
+        android:icon="@drawable/info"
+        android:orderInCategory="2"
+        android:showAsAction="always"
+        android:title="About Us"/>
+
+    <!--
+         <item
         android:id="@+id/menu_settings"
         android:icon="@drawable/icon_settings_1"
         android:orderInCategory="1"
         android:showAsAction="ifRoom"
-        android:title="@string/menu_settings" />
-     -->
+        android:title="@string/menu_settings" />
+    -->
 
 </menu>
