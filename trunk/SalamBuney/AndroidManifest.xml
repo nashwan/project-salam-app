@@ -62,7 +62,7 @@
         </activity>
         <activity
             android:name="templates.MessageSender"
-            android:label="Send Message" >
+            android:label="Send Salaam" >
         </activity>
         <activity
             android:name="contacts.Numbers"
@@ -70,20 +70,30 @@
         </activity>
         <activity
             android:name=".SchedularMessageSent"
-            android:label="Scheduled Message Sent" 
-            android:theme="@android:style/Theme.Dialog" >
-        </activity>
-         <activity
-            android:name="com.example.salambuney.ScheduleMessageInformation"
-            android:label="Scheduled Salaam Message" 
+            android:label="Scheduled Message Sent"
             android:theme="@android:style/Theme.Dialog" >
         </activity>
         <activity
+            android:name="com.example.salambuney.ScheduleMessageInformation"
+            android:label="Scheduled Salaam Message"
+            android:theme="@android:style/Theme.Holo.Light.Dialog.NoActionBar" >
+        </activity>
+        <activity
             android:name="templates.ScheduleMessage"
-            android:label="Schedule Message"
-            >
+            android:label="Schedule Salaam" >
+        </activity>
+        <activity
+            android:name="com.example.salambuney.MessageScheduleReadyToSend"
+            android:label="Sending Salaam"
+            android:theme="@android:style/Theme.Holo.Light.Dialog.NoActionBar" >
         </activity>
 
+        <activity
+            android:name="com.example.salambuney.AppInformation"
+            android:label="Information"
+            android:theme="@android:style/Theme.Holo.Light.Dialog.NoActionBar" >
+        </activity>
+        
         <provider
             android:name="com.example.salambuney.SalaamDBProvider"
             android:authorities="com.example.salambuney"

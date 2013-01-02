@@ -96,13 +96,15 @@ public class MainActivity extends TabActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 
-		// if (item.getItemId() == R.id.menu_settings) {
-		//
-		// Intent intent = new Intent();
-		// intent.setClass(this, SettingsActivity.class);
-		// startActivity(intent);
-		//
-		// }
+		if (item.getItemId() == R.id.menu_information) {
+
+			Intent intent = new Intent();
+			intent.setClass(this, AppInformation.class);
+			startActivity(intent);
+
+		}
+
+	
 
 		if (item.getItemId() == R.id.menu_new_template) {
 
