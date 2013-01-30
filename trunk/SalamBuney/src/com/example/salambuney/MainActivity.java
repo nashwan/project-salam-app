@@ -6,6 +6,7 @@ import contacts.Numbers;
 import templates.Templates;
 import templates.NewSMSTemplate;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.app.NotificationManager;
@@ -13,8 +14,10 @@ import android.app.TabActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -39,11 +42,12 @@ public class MainActivity extends TabActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		
 		setContentView(R.layout.activity_main);
 		//
 		ActionBar bar = getActionBar();
 		bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#790404")));
-		// bar.setSubtitle("kuru city");
+		bar.setSubtitle("Sick Leaves");
 		bar.setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE);
 
 		// Create tabs
@@ -57,7 +61,7 @@ public class MainActivity extends TabActivity {
 
 		// Tab for Numbers
 		TabSpec numberSpec = tabHost.newTabSpec("numbers");
-		numberSpec.setIndicator("Numbers");
+		numberSpec.setIndicator("Contacts");
 
 		Intent numberIntent = new Intent(this, Numbers.class);
 		numberSpec.setContent(numberIntent);
@@ -122,6 +126,13 @@ public class MainActivity extends TabActivity {
 
 		}
 
+		if (item.getItemId() == R.id.menu_settings) {
+
+			Intent intent = new Intent();
+			intent.setClass(this,SettingsActivity.class);
+			startActivity(intent);
+
+		}
 
 		return super.onOptionsItemSelected(item);
 	}

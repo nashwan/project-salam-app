@@ -66,10 +66,10 @@ public class Templates extends Activity implements OnClickListener,
 			messageTV.setLayoutParams(new LayoutParams(
 					LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT, 1));
 
-			messageTV.setTextSize(18);
-			messageTV.setPadding(8, 4, 2, 4);
+			messageTV.setTextSize(17);
+			messageTV.setPadding(8, 6, 2, 6);
 			messageTV.setGravity(Gravity.TOP);
-
+			
 			messageTV.setText(message); // set message
 			messageTV.setTag(message_id);
 			messageTV.setOnClickListener(this);

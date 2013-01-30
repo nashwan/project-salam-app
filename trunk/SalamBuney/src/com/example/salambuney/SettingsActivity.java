@@ -13,7 +13,10 @@ public class SettingsActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		ActionBar bar = getActionBar(); 
-		bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#064682")));
+		
+		bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#790404")));
+		// bar.setSubtitle("kuru city");
+		bar.setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE);
 		// Display the fragment as the main content.
 		getFragmentManager().beginTransaction()
 				.replace(android.R.id.content, new SettingsFragment()).commit();

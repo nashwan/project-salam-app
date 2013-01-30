@@ -7,19 +7,22 @@
         android:key="message"
         android:summary="Message in Salam"
         android:title="Message" /> -->
-    <!-- <EditTextPreference
-        android:dialogMessage="Enter mobile number to send sms to"
-        android:dialogTitle="Mobile Number"
-        android:key="mobile"
-        android:summary="Mobile phone to which sms will be sent"
-        android:title="Phone Number " /> -->
+   
 
     <com.example.salambuney.TimePreference
-        android:dialogMessage="Gadijehey Time"
+        android:dialogMessage="Please enter your office time."
         android:dialogTitle="Gadijehey Time"
         android:key="reporting_time"
-        android:summary="Gadijehey Time"
+        android:defaultValue="8:0"
+        android:summary="Office reporting time"
         android:title="Gadijehey Time " >
     </com.example.salambuney.TimePreference>
+    
+     <EditTextPreference
+        android:dialogTitle="Sick Leaves Available"
+        android:key="sick_leave_remaining"
+        android:defaultValue="20"
+        android:summary="Number of days remaining from sick leaves"
+        android:title="Sick Leaves Available" /> 
 
 </PreferenceScreen>

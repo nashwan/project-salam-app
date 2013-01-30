@@ -9,14 +9,18 @@ import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
+import android.preference.PreferenceManager;
 import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
@@ -284,10 +288,100 @@ public class MessageScheduleReadyToSend extends Activity implements
 			String SENT = "SMS_SENT";
 			String DELIVERED = "SMS_DELIVERED";
 			try {
+				// ---when the SMS has been sent---
+				getApplication().registerReceiver(new BroadcastReceiver() {
+					@Override
+					public void onReceive(Context context, Intent arg1) {
+						switch (getResultCode()) {
+						case Activity.RESULT_OK:
+							Toast.makeText(getBaseContext(), "SMS sent",
+									Toast.LENGTH_SHORT).show();
+
+							StoreSMS(smsTextToSent, smsNumber);
+
+							break;
+						case SmsManager.RESULT_ERROR_GENERIC_FAILURE:
+							Toast.makeText(context, "Generic failure",
+									Toast.LENGTH_SHORT).show();
+							break;
+						case SmsManager.RESULT_ERROR_NO_SERVICE:
+							Toast.makeText(context, "No service",
+									Toast.LENGTH_SHORT).show();
+							break;
+						case SmsManager.RESULT_ERROR_NULL_PDU:
+							Toast.makeText(context, "Null PDU",
+									Toast.LENGTH_SHORT).show();
+
+							break;
+						case SmsManager.RESULT_ERROR_RADIO_OFF:
+							Toast.makeText(context, "Radio off",
+									Toast.LENGTH_SHORT).show();
+
+							break;
+
+						}
+
+						getApplication().unregisterReceiver(this);
+
+					}
+
+				}, new IntentFilter(SENT));
+
+				PendingIntent sentPI = PendingIntent.getBroadcast(ctx, 0,
+						new Intent(SENT), 0);
+				PendingIntent deliveredPI = PendingIntent.getBroadcast(ctx, 0,
+						new Intent(DELIVERED), 0);
+
+				// ---when the SMS delivery report is recieved--
+				getApplication().registerReceiver(new BroadcastReceiver() {
+					@Override
+					public void onReceive(Context context, Intent arg1) {
+						switch (getResultCode()) {
+
+						case Activity.RESULT_OK:
+							Toast.makeText(getBaseContext(), "SMS delivered",
+									Toast.LENGTH_SHORT).show();
+							
+							// update the remaining salaam days 
+							SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+							String strDaysLeft = prefs.getString("sick_leave_remaining", "0");
+							int daysLeft = Integer.parseInt(strDaysLeft);
+							
+							if(daysLeft > 0)
+							{
+								daysLeft = daysLeft - 1;
+								prefs.edit().putString("sick_leave_remaining",""+daysLeft).commit();
+							}
+							
+							break;
+						case Activity.RESULT_CANCELED:
+							Toast.makeText(getBaseContext(),
+									"SMS not delivered", Toast.LENGTH_SHORT)
+									.show();
+
+							break;
+						}
+
+						getApplication().unregisterReceiver(this);
+
+					}
+
+				}, new IntentFilter(DELIVERED));
 
 				// send sms
 				SmsManager sms = SmsManager.getDefault();
-				sms.sendTextMessage(smsNumber, null, smsTextToSent, null, null);
+				sms.sendTextMessage(smsNumber, null, smsTextToSent, sentPI,
+						deliveredPI);
+
+			
+//			
+//			String SENT = "SMS_SENT";
+//			String DELIVERED = "SMS_DELIVERED";
+//			try {
+//
+//				// send sms
+//				SmsManager sms = SmsManager.getDefault();
+//				sms.sendTextMessage(smsNumber, null, smsTextToSent, null, null);
 
 				return true;
 			} catch (Exception ex) {

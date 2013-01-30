@@ -15,8 +15,10 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -69,12 +71,14 @@ public class History extends Activity implements OnDialogDoneListener,
 		}
 
 		TextView info = (TextView) findViewById(R.id.tvInforHistory);
-		if (cursor.getCount() == 0) {
 
-			info.setVisibility(View.VISIBLE);
-		} else {
-			info.setVisibility(View.GONE);
-		}
+		SharedPreferences pref = PreferenceManager
+				.getDefaultSharedPreferences(getApplicationContext());
+		String salaamDaysLeft = "";
+		salaamDaysLeft = pref.getString("sick_leave_remaining", "0");
+
+		info.setText("You have got " + salaamDaysLeft + " sick leaves left.");
+		// info.setVisibility(View.GONE);
 
 		templatesTL.setAdapter(new HistoryArrayAdapter(this,
 				android.R.layout.simple_expandable_list_item_1, contacts));
@@ -86,8 +90,6 @@ public class History extends Activity implements OnDialogDoneListener,
 				SalaamDBProvider.FROM_HISTORY_TABLE, null, null,
 				SalaamDB.HISTORY_ID + " DESC");
 	}
-
-
 
 	@Override
 	public void onClick(View v) {
@@ -113,12 +115,12 @@ public class History extends Activity implements OnDialogDoneListener,
 
 				int deletedCount = getContentResolver().delete(
 						SalaamDBProvider.CONTENT_URI_HISTORY, null, null);
-				if(deletedCount != 0)
-					Toast.makeText(this, "Deleted all history.", Toast.LENGTH_SHORT)
-							.show();
+				if (deletedCount != 0)
+					Toast.makeText(this, "Deleted all history.",
+							Toast.LENGTH_SHORT).show();
 				else
-					Toast.makeText(this, "History is empty.", Toast.LENGTH_SHORT)
-					.show();
+					Toast.makeText(this, "History is empty.",
+							Toast.LENGTH_SHORT).show();
 				showHistory(getData());
 
 			}
@@ -127,7 +129,7 @@ public class History extends Activity implements OnDialogDoneListener,
 			Toast.makeText(this, "Delete failed.", Toast.LENGTH_SHORT).show();
 		}
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -137,7 +139,6 @@ public class History extends Activity implements OnDialogDoneListener,
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-
 
 		try {
 			if (item.getItemId() == R.id.menu_clear_history) {
@@ -159,6 +160,5 @@ public class History extends Activity implements OnDialogDoneListener,
 
 		return super.onOptionsItemSelected(item);
 	}
-
 
 }

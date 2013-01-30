@@ -68,13 +68,27 @@ public class SalaamDB extends SQLiteOpenHelper {
 	private void insertInitialData(SQLiteDatabase db) {
 
 		// insert intial templates
-		db.execSQL("INSERT INTO templates VALUES(1,'I have fever')");
-		db.execSQL("INSERT INTO templates VALUES(2,'Varah salaam')");
-		db.execSQL("INSERT INTO templates VALUES(3,'Beyrah Hinganee eve')");
-		db.execSQL("INSERT INTO templates VALUES(4,'Fever')");
-		db.execSQL("INSERT INTO templates VALUES(5,'Balivee')");
-		db.execSQL("INSERT INTO templates VALUES(6,'Adhives balive')");
-
+		db.execSQL("INSERT INTO templates VALUES(1,'I am not feeling well today.')");
+		db.execSQL("INSERT INTO templates VALUES(2,'Having continous dry cough, with throat irritation.')");
+		db.execSQL("INSERT INTO templates VALUES(3,'Caught a fever, could not attend duty.')");
+		db.execSQL("INSERT INTO templates VALUES(4,'I am having a severe headache')");
+		db.execSQL("INSERT INTO templates VALUES(5,'Got a migraine attack.')");
+		db.execSQL("INSERT INTO templates VALUES(6,'I have got a severe stomache ache. Salaam.')");
+		db.execSQL("INSERT INTO templates VALUES(7,'Salaam, having a back pain. Going to see a doc.')");
+		db.execSQL("INSERT INTO templates VALUES(8,'Feeling nausea.')");
+		db.execSQL("INSERT INTO templates VALUES(9,'Balive')");
+		db.execSQL("INSERT INTO templates VALUES(10,'Salaam, I am sick.')");
+		db.execSQL("INSERT INTO templates VALUES(11,'Adhives balive')");
+		db.execSQL("INSERT INTO templates VALUES(12,'I am having breathing difficulty, going to see the doc today.')");
+		db.execSQL("INSERT INTO templates VALUES(13,'Severe Headche, salaam.')");
+		db.execSQL("INSERT INTO templates VALUES(14,'Got an allergy, need to see the doc. salaam.')");
+		db.execSQL("INSERT INTO templates VALUES(15,'I got loose motion and vomiting, could not attend duty, sorry.')");
+		db.execSQL("INSERT INTO templates VALUES(16,'Salaam.')");
+		db.execSQL("INSERT INTO templates VALUES(17,'Adhives varah hungadha.')");
+		db.execSQL("INSERT INTO templates VALUES(18,'Due to the cold weather, my joints are paining. Could not goto duty " +
+				"today.')");
+		db.execSQL("INSERT INTO templates VALUES(19,'Got Upper respiratory track infection (URTI). Salaam.')");
+		db.execSQL("INSERT INTO templates VALUES(20,'Severe lowwer abdomen pain, salaam.')");
 	}
 
 	public SalaamDB(Context context) {
