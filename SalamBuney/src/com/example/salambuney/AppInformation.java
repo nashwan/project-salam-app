@@ -13,7 +13,7 @@ public class AppInformation extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activty_information);
 		
-		String[] developers = new String[] { "Mohamed Nasru", "Ibrahim Nashwan", "Yoosuf Nabeel Solih" };
+		String[] developers = new String[] {"Yoosuf Nabeel Solih", "Mohamed Nasru", "Ibrahim Nashwan" };
 
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(
 				this, android.R.layout.simple_list_item_1, developers);

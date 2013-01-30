@@ -8,6 +8,7 @@ import com.example.salambuney.R;
 import com.example.salambuney.SalaamDBProvider;
 import com.example.salambuney.ScheduleMessageInformation;
 import com.example.salambuney.SharedConfig;
+import com.example.salambuney.TimePreference;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -17,11 +18,13 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.format.Time;
 import android.util.Log;
 import android.view.View;
@@ -86,6 +89,16 @@ public class ScheduleMessage extends Activity implements OnClickListener {
 
 			startManagingCursor(cursor2);
 
+			if (cursor2.isAfterLast()) {
+
+				TextView textView = new TextView(this);
+				textView.setText("no contacts found.");
+				textView.setPadding(10, 2, 0, 2);
+				textView.setTextColor(Color.parseColor("#4f290b"));
+				textView.setBackgroundResource(R.drawable.template_row_default);
+				listPhoneNumbers.addView(textView);
+			}
+
 			while (cursor2.moveToNext()) {
 
 				CheckBox checkBox = new CheckBox(this);
@@ -98,6 +111,14 @@ public class ScheduleMessage extends Activity implements OnClickListener {
 				listPhoneNumbers.addView(checkBox);
 
 			}
+
+			// set default time from the preferance
+			SharedPreferences pref = PreferenceManager
+					.getDefaultSharedPreferences(getApplicationContext());
+			String timeMillis = pref.getString("reporting_time", "00:00");
+
+			timePicker.setCurrentHour(TimePreference.getHour(timeMillis));
+			timePicker.setCurrentMinute(TimePreference.getMinute(timeMillis));
 
 		} catch (Exception ex) {
 			System.out.println("Error: " + ex.toString());
@@ -172,11 +193,10 @@ public class ScheduleMessage extends Activity implements OnClickListener {
 							SharedConfig.ALARM_SMS_SCHEDULE_MESSAGE,
 							smsSchedular, 0);
 
-					if(seconds >= 30)
-					{
-						seconds  =  seconds - 30;
+					if (seconds >= 30) {
+						seconds = seconds - 30;
 					}
-					
+
 					AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 					alarmManager.set(AlarmManager.RTC_WAKEUP,
 							System.currentTimeMillis() + (seconds * 1000),
@@ -198,8 +218,8 @@ public class ScheduleMessage extends Activity implements OnClickListener {
 							System.currentTimeMillis());
 
 					notification.setLatestEventInfo(this,
-							"V.Salaam - SMS Schedule", "Time: "+strDate +", Message: "
-									+ smsTextToSent,
+							"V.Salaam - SMS Schedule", "Time: " + strDate
+									+ ", Message: " + smsTextToSent,
 							pendingIntentNotificationClick);
 
 					notification.flags |= Notification.FLAG_NO_CLEAR;

@@ -20,12 +20,14 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
@@ -87,7 +89,15 @@ public class MessageSender extends Activity implements OnClickListener {
 					SalaamDBProvider.FROM_CONTACT_TABLE, null, null, null);
 
 			startManagingCursor(cursor2);
-
+			if (cursor2.isAfterLast()) {
+				
+				TextView textView = new TextView(this);
+				textView.setPadding(10, 2, 0, 2);
+				textView.setText("no contacts found.");
+				textView.setTextColor(Color.parseColor("#4f290b"));
+				textView.setBackgroundResource(R.drawable.template_row_default);
+				listPhoneNumbers.addView(textView);
+			}
 			while (cursor2.moveToNext()) {
 
 				CheckBox checkBox = new CheckBox(this);
@@ -336,7 +346,18 @@ public class MessageSender extends Activity implements OnClickListener {
 						case Activity.RESULT_OK:
 							Toast.makeText(getBaseContext(), "SMS delivered",
 									Toast.LENGTH_SHORT).show();
+							
+							// update the remaining salaam days 
+							SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+							String strDaysLeft = prefs.getString("sick_leave_remaining", "0");
+							int daysLeft = Integer.parseInt(strDaysLeft);
 
+							if(daysLeft > 0)
+							{
+								daysLeft = daysLeft - 1;
+								prefs.edit().putString("sick_leave_remaining",""+daysLeft).commit();
+							}
+							
 							break;
 						case Activity.RESULT_CANCELED:
 							Toast.makeText(getBaseContext(),

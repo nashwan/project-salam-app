@@ -55,10 +55,10 @@ public final class R {
         public static final int listTemplates=0x7f08002a;
         public static final int main_content_container=0x7f080002;
         public static final int menu_clear_history=0x7f080046;
-        public static final int menu_information=0x7f080049;
+        public static final int menu_information=0x7f08004a;
         public static final int menu_new_contact=0x7f080048;
         public static final int menu_new_template=0x7f080047;
-        public static final int menu_settings=0x7f08004a;
+        public static final int menu_settings=0x7f080049;
         public static final int progressBar1=0x7f080028;
         public static final int scrollView1=0x7f080018;
         public static final int tab1=0x7f080003;

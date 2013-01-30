@@ -2,28 +2,31 @@
 
     <item
         android:id="@+id/menu_new_template"
-        android:orderInCategory="2"
+        android:orderInCategory="1"
         android:showAsAction="never"
-        android:title="New Template"/>
+        android:title="New Message Template"/>
     <item
         android:id="@+id/menu_new_contact"
         android:orderInCategory="2"
         android:showAsAction="never"
-        android:title="New Phone Number"/>
+        android:title="New Contact"/>
+    
+    <item
+        android:id="@+id/menu_settings"
+        android:icon="@drawable/icon_settings_1"
+        android:orderInCategory="3"
+        android:showAsAction="never"
+        android:title="@string/menu_settings" />
+    
     <item
         android:id="@+id/menu_information"
         android:icon="@drawable/info"
-        android:orderInCategory="2"
+        android:orderInCategory="4"
         android:showAsAction="always"
         android:title="About Us"/>
 
-    <!--
-         <item
-        android:id="@+id/menu_settings"
-        android:icon="@drawable/icon_settings_1"
-        android:orderInCategory="1"
-        android:showAsAction="ifRoom"
-        android:title="@string/menu_settings" />
-    -->
+    
+         
+    
 
 </menu>
